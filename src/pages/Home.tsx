@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import cra from '../assets/svg/cra.svg';
 import next from '../assets/svg/next.svg';
 import materialUI from '../assets/svg/materialUI.svg';
@@ -13,8 +13,10 @@ const HomePage = () => {
   const [projectName, setProjectName] = useState('');
   const [gitUrl, setGitUrl] = useState('');
   const [active, setActive] = useState([0]);
+  const scrollRef = useRef<HTMLDivElement>(null);
 
   const changeFramework = (val: number) => {
+    setGitUrl('');
     setFramework(val);
     let temp = active;
     temp = temp.filter((ele) => ele !== 1 && ele !== 2);
@@ -23,6 +25,7 @@ const HomePage = () => {
   };
 
   const changeUikit = (val: number) => {
+    setGitUrl('');
     setUiKit(val);
     let temp = active;
     temp = temp.filter((ele) => ![3, 4, 5].includes(ele));
@@ -60,13 +63,13 @@ const HomePage = () => {
   const checkUiKit = (text: string): string => {
     let url = text;
     switch (uiKit) {
-      case 3:
+      case 5:
         url += ' --uikit antdesign';
         break;
       case 4:
         url += ' --uikit materialui';
         break;
-      case 5:
+      case 3:
         url += ' --uikit tailwindcss';
         break;
 
@@ -76,7 +79,7 @@ const HomePage = () => {
     return url;
   };
   const onSubmit = () => {
-    let url = 'npx @fibonalabs/create-fibonalabs-ui --projectname ';
+    let url = 'npx @fibonalabs/create-fibonalabs-ui@latest --projectname ';
     url += projectName;
     url = checkUiKit(url);
 
@@ -95,11 +98,15 @@ const HomePage = () => {
     setGitUrl(url);
   };
 
+  useEffect(() => {
+    const divEle = scrollRef.current;
+    divEle?.scrollIntoView({
+      behavior: 'smooth',
+    });
+  }, [gitUrl]);
   return (
     <>
-      <div
-        className="header text-white bg-black h-30"
-      >
+      <div className="header text-white bg-black h-30">
         <div>
           <div className="flex  px-10">
             <img src={logo} alt="text" />
@@ -118,7 +125,7 @@ const HomePage = () => {
             <ol className="list-decimal ml-5 grid grid-cols-1 gap-5">
               <li className="text-lg ">
                 Choose The Framework
-                <div className=" flex flex-col  md:flex-row gap-10 mt-5 ">
+                <div className=" flex flex-col  md:flex-row gap-10 mt-3 ">
                   <Card val={1} name="CRA" func={changeFramework}>
                     <img src={cra} alt="text" title="CRA" />
                   </Card>
@@ -129,7 +136,7 @@ const HomePage = () => {
               </li>
               <li className="text-lg ">
                 Choose the UI Kit
-                <div className="flex flex-col md:flex-row gap-10 mt-5 ">
+                <div className="flex flex-col md:flex-row gap-10 mt-3 ">
                   <Card val={3} name="Tailwind" func={changeUikit}>
                     <img src={tailwind} alt="text" title="CRA" />
                   </Card>
@@ -170,26 +177,25 @@ const HomePage = () => {
             >
               Submit
             </button>
-            {gitUrl !== '' ? (
-              <div className="flex gap-5">
+            <div className="flex gap-5" ref={scrollRef}>
+              {gitUrl !== '' ? (
                 <>
                   <input
-                    className="my-5 border-solid border-2 bg-white pl-2 w-96 h-8"
+                    className="my-5  rounded-sm bg-black text-white pl-2 w-96 h-8 "
                     value={gitUrl}
                     disabled
-                    onChange={(e) => {
-                      setProjectName(e.target.value);
-                    }}
                   />
+
+                  <button
+                    type="button"
+                    onClick={() => copyUrl(gitUrl)}
+                    title="Copy command"
+                  >
+                    <img src={copy} alt="text" />
+                  </button>
                 </>
-                <button
-                  type="button"
-                  onClick={() => copyUrl(gitUrl)}
-                >
-                  <img src={copy} alt="text" />
-                </button>
-              </div>
-            ) : null}
+              ) : null}
+            </div>
           </div>
         </div>
       </div>
