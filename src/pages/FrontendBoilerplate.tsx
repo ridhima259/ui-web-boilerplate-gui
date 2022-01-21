@@ -267,11 +267,12 @@ const BoilerPlate = () => {
               }}
             >
               <Step
-                description={
-                  <div className="h-16">{frameworkContent[framework].name}</div>
-                }
+                description={(
+                  <div className="h-16 mt-6">
+                    {frameworkContent[framework].name}
+                  </div>
+                )}
                 title="Framework"
-                // icon={<img src={checkIcon} alt="Not found" />}
               />
               <Step
                 disabled={step <= 1 && framework === 0}

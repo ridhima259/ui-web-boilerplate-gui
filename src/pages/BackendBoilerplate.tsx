@@ -12,7 +12,7 @@ import { title } from '../assets/data/content';
 const BackendBoilerPlate = () => {
   const [alert, showAlert] = useState(false);
   const active = [0];
-  const url = 'git clone https://github.com/Fibonalabs-Developers/be-nodejs-boilerplate.git';
+  const url = 'npx @fibonalabs/create-fibonalabs-be@latest';
 
   const copyUrl = (val: string) => {
     showAlert(true);
@@ -82,9 +82,9 @@ const BackendBoilerPlate = () => {
         </div>
         <div className="w-full mt-11">
           <h2 className="text-lg ">Command</h2>
-          <div className="flex w-full mt-3 ">
+          <div className="flex w-full mt-1 ">
             <input
-              className="my-5 mr-5 rounded-sm bg-blue-600 text-white pl-2 w-full h-8 "
+              className="my-5 mr-5 rounded-sm bg-blue-600 text-white pl-2 w-96 h-8 "
               value={url}
               disabled
             />
@@ -97,15 +97,10 @@ const BackendBoilerPlate = () => {
               <img src={copy} alt="text" />
             </button>
           </div>
-          <ul className="text-lg list-disc ml-5">
+          <h2 className="text-lg">
             {' '}
-            <li>
-              Clone this project by running the above command in your terminal
-            </li>
-            <li>
-              Run npm install in the project directory to install the packages.
-            </li>
-          </ul>
+            Kick start your project by executing the command in your terminal
+          </h2>
         </div>
       </Layout>
     </div>
