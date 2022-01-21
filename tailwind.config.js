@@ -3,14 +3,25 @@ module.exports = {
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
-       colors:{
-        'cream': '#FAF5F0'
+      fontFamily: {
+        body: ['Mulish'],
       },
+      colors: {
+        slategray: '#F6F9FC',
+      },
+      flex: {
+        2: '2 2 0%',
+        3: '3 3 0%',
+        4: '4 4 0%',
+        5: '5 5 0%',
+        6: '6 6 0%',
+      },
+      display: ['group-hover'],
     },
   },
   variants: {
     extend: {
-      animation: ['hover']
+      animation: ['hover'],
     },
   },
   plugins: [],
