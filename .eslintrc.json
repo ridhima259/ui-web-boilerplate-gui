@@ -20,6 +20,7 @@
   // "indent": ["error", "tab"],
   "plugins": ["react", "@typescript-eslint", "react-hooks"],
   "rules": {
+    "max-len": "off",
     "indent": "off",
     "linebreak-style": 0,
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
@@ -28,6 +29,7 @@
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/prop-types": "off",
+    "no-useless-concat": "off",
     "import/extensions": [
       "error",
       "ignorePackages",

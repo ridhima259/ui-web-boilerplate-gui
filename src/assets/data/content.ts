@@ -3,8 +3,9 @@ interface keyable {
 }
 export type navType = {
   name: string;
-  date: string;
+  date?: string;
   href: string;
+  desc?: string;
 };
 export const frameworkContent: keyable = {
   0: {
@@ -46,12 +47,17 @@ export const uiKitContent: keyable = {
 export const navList: navType[] = [
   {
     name: 'React Frontend Boilerpate',
-    date: 'January 2022',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
     href: '/react-boilerplate',
   },
   {
     name: 'Backend NodeJS Boilerplate',
-    date: 'January 2022',
+    desc: 'A backend boilerplate is a starter project for quickly building RESTful APIs using Node.js with the Docker Support. By running a single command, you will get a production-ready Node.js app installed and fully configured on your machine. The app comes with many built-in features, such as authentication using JWT, request validation, unit and integration tests, continuous integration, docker support, API documentation, pagination, etc.',
+    href: '/backend-boilerplate',
+  },
+  {
+    name: 'Backend NodeJS Boilerplate',
+    desc: 'A backend boilerplate is a starter project for quickly building RESTful APIs using Node.js with the Docker Support. By running a single command, you will get a production-ready Node.js app installed and fully configured on your machine. The app comes with many built-in features, such as authentication using JWT, request validation, unit and integration tests, continuous integration, docker support, API documentation, pagination, etc.',
     href: '/backend-boilerplate',
   },
 ];

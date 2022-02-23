@@ -8,7 +8,7 @@
     "build": "craco build",
     "test": "craco test",
     "eject": "react-scripts eject",
-    "lint": "tsc && eslint ./src/**/*.tsx",
+    "lint": "tsc && eslint ./src/**/*.ts --fix",
     "lighthouse:desktop": "lighthouse http://localhost:3000/ --headless --preset=desktop --view --output html --output-path ./lighthouse.html",
     "lighthouse:mobile": "lighthouse http://localhost:3000/ --headless --preset=desktop --view --output html --output-path ./lighthouse.html",
     "prepare": "husky install",

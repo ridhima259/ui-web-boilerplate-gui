@@ -2,14 +2,15 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import BackendBoilerPlate from './pages/BackendBoilerplate';
 import FrontendBoilerPlate from './pages/FrontendBoilerplate';
-import Home from './pages/Home';
+// import Home from './pages/Home';
+import NewHome from './pages/newHome';
 
 function App() {
   return (
     <Router>
       <Switch>
         <Route exact path="/">
-          <Home />
+          <NewHome />
         </Route>
         <Route exact path="/react-boilerplate">
           <FrontendBoilerPlate />

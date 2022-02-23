@@ -8,6 +8,7 @@ module.exports = {
       },
       colors: {
         slategray: '#F6F9FC',
+        gray: '#ECECED',
       },
       flex: {
         2: '2 2 0%',
