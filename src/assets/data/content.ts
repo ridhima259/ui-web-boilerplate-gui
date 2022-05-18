@@ -54,6 +54,36 @@ export const navList: navType[] = [
     date: 'January 2022',
     href: '/backend-boilerplate',
   },
+  {
+    name: 'React Frontend Boilerpate',
+    date: 'January 2022',
+    href: '/react-boilerplate',
+  },
+  {
+    name: 'Backend NodeJS Boilerplate',
+    date: 'January 2022',
+    href: '/backend-boilerplate',
+  },
+  {
+    name: 'React Frontend Boilerpate',
+    date: 'January 2022',
+    href: '/react-boilerplate',
+  },
+  {
+    name: 'Backend NodeJS Boilerplate',
+    date: 'January 2022',
+    href: '/backend-boilerplate',
+  },
+  {
+    name: 'React Frontend Boilerpate',
+    date: 'January 2022',
+    href: '/react-boilerplate',
+  },
+  {
+    name: 'Backend NodeJS Boilerplate',
+    date: 'January 2022',
+    href: '/backend-boilerplate',
+  },
 ];
 
 export const title = 'A backend boilerplate is a starter project for quickly building RESTful APIs using Node.js with the Docker Support. By running a single command, you will get a production-ready Node.js app installed and fully configured on your machine. The app comes with many built-in features, such as authentication using JWT, request validation, unit and integration tests, continuous integration, docker support, API documentation, pagination, etc.';

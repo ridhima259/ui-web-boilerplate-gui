@@ -35,6 +35,7 @@
         "ts": "never",
         "tsx": "never"
       }
-    ]
+    ],
+    "max-len":"off"
   }
 }
