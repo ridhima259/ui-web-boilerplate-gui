@@ -5,6 +5,7 @@ export type navType = {
   name: string;
   date: string;
   href: string;
+  desc: string;
 };
 export const frameworkContent: keyable = {
   0: {
@@ -48,41 +49,73 @@ export const navList: navType[] = [
     name: 'React Frontend Boilerpate',
     date: 'January 2022',
     href: '/react-boilerplate',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
   },
   {
     name: 'Backend NodeJS Boilerplate',
     date: 'January 2022',
     href: '/backend-boilerplate',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
   },
   {
     name: 'React Frontend Boilerpate',
     date: 'January 2022',
     href: '/react-boilerplate',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
   },
   {
     name: 'Backend NodeJS Boilerplate',
     date: 'January 2022',
     href: '/backend-boilerplate',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
   },
   {
     name: 'React Frontend Boilerpate',
     date: 'January 2022',
     href: '/react-boilerplate',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
   },
   {
     name: 'Backend NodeJS Boilerplate',
     date: 'January 2022',
     href: '/backend-boilerplate',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
   },
   {
     name: 'React Frontend Boilerpate',
     date: 'January 2022',
     href: '/react-boilerplate',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
   },
   {
     name: 'Backend NodeJS Boilerplate',
     date: 'January 2022',
     href: '/backend-boilerplate',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
+  },
+  {
+    name: 'React Frontend Boilerpate',
+    date: 'January 2022',
+    href: '/react-boilerplate',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
+  },
+  {
+    name: 'Backend NodeJS Boilerplate',
+    date: 'January 2022',
+    href: '/backend-boilerplate',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
+  },
+  {
+    name: 'React Frontend Boilerpate',
+    date: 'January 2022',
+    href: '/react-boilerplate',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
+  },
+  {
+    name: 'Backend NodeJS Boilerplate',
+    date: 'January 2022',
+    href: '/backend-boilerplate',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
   },
 ];
 
