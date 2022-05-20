@@ -43,10 +43,18 @@ const Home = () => {
           </p>
           <div className="mt-5 flex justify-between">
             <div>
-              <img className="mr-2 inline" src={downloadIcon} alt="Not found" />
+              <img
+                className="mr-2 inline"
+                src={downloadIcon}
+                alt="Not found"
+              />
               <span>10</span>
-              <img className="ml-5 inline" src={heartIcon} alt="Not found" />
-              <span className="mr-5 ml-2">10</span>
+              <img
+                className="ml-5  inline"
+                src={heartIcon}
+                alt="Not found"
+              />
+              <span className=" ml-2  ">10</span>
             </div>
             <div>
               <a href={href} className="text-bluetext text-right text-sm ml-0">
@@ -60,7 +68,7 @@ const Home = () => {
     );
   };
   return (
-    <div className="">
+    <div className="w-full">
       <Header />
       {/* <Header title="Pure Components" subtitle="">
         <img src={fibLogo} alt="No text" />
@@ -68,15 +76,21 @@ const Home = () => {
       <Layout backButton={false} alert={false}>
         <div className="text-center gap-5 pb-10">
           <span className="flex justify-center">
-            <img className="mr-10" src={fibLogo} alt="Not found" />
-            <h1 className=" text-6xl font-extrabold mt-1">Fibonalabs</h1>
+            <img
+              className="mr-4 w-10 lg:mr-10 w-12"
+              src={fibLogo}
+              alt="Not found"
+            />
+            <h1 className="text-4xl mt-4 lg:text-6xl font-extrabold mt-1">
+              Fibonalabs
+            </h1>
           </span>
 
           <h6 className="text-md font-light mt-3">
             A Quick setup to build your own application
           </h6>
         </div>
-        <div className="card grid grid-cols-3 gap-1">
+        <div className="card grid grid-cols-1 xl:grid-cols-3 gap-1 lg:grid-cols-3 md:grid-cols-2">
           {navList.map((data) => (
             <Card
               name={data.name}
