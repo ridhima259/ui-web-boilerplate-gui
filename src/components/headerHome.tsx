@@ -6,13 +6,18 @@ const headerHome = () => (
       <a href="/" className="mx-3 lg:mx-5">
         Home
       </a>
-      <a href="/" className="mx-3 lg:mx-5">
+      <a
+        href="https://blog.fibonalabs.com/"
+        target="_blank"
+        rel="noreferrer"
+        className="mx-3 lg:mx-5"
+      >
         Blogs
       </a>
-      <a href="/" className="mx-3 lg:mx-5">
+      <a href="https://www.fibonalabs.com/aboutus" className="mx-3 lg:mx-5">
         About Us
       </a>
-      <a href="/" className="mx-3 lg:mx-5">
+      <a href="https://www.fibonalabs.com/contactus" className="mx-3 lg:mx-5">
         Contact Us
       </a>
     </div>

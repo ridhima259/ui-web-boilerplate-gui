@@ -15,13 +15,15 @@ import Footer from '../components/footer';
 const Home = () => {
   const Card = (details: navType) => {
     const {
-      name, date, href, desc,
-    } = details;
+      name, date, href, desc, readMorehref,
+     } = details;
     console.log('data', name, date);
     return (
       <a
         className="flex flex-col md:flex-row mb-4 mx-3 hover:shadow-3xl"
         href={href}
+        target="_blank"
+        rel="noreferrer"
       >
         {/* <img
           className="bg-blue-600 p-5 flex-end"
@@ -43,21 +45,18 @@ const Home = () => {
           </p>
           <div className="mt-5 flex justify-between">
             <div>
-              <img
-                className="mr-2 inline"
-                src={downloadIcon}
-                alt="Not found"
-              />
+              <img className="mr-2 inline" src={downloadIcon} alt="Not found" />
               <span>10</span>
-              <img
-                className="ml-5  inline"
-                src={heartIcon}
-                alt="Not found"
-              />
+              <img className="ml-5  inline" src={heartIcon} alt="Not found" />
               <span className=" ml-2  ">10</span>
             </div>
             <div>
-              <a href={href} className="text-bluetext text-right text-sm ml-0">
+              <a
+                href={readMorehref}
+                target="_blank"
+                rel="noreferrer"
+                className="text-bluetext text-right text-sm ml-0"
+              >
                 Read more
                 <img className="ml-2 inline" src={arrowRight} alt="Not found" />
               </a>
@@ -94,6 +93,7 @@ const Home = () => {
           {navList.map((data) => (
             <Card
               name={data.name}
+              readMorehref={data.readMorehref}
               href={data.href}
               date={data.date}
               desc={data.desc}
