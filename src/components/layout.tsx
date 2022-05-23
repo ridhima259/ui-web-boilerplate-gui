@@ -26,7 +26,7 @@ const Layout: React.FC<LayoutInterface> = ({ children, backButton, alert }) => (
         <a
           href="/"
           title="back"
-          className=" p-5 absolute bg-blue-600 rounded-full top-36 left-3"
+          className=" p-5 absolute bg-blue-600 rounded-full top-24 left-3"
         >
           <img src={back} alt="text" />
         </a>

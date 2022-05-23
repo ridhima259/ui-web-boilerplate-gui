@@ -63,7 +63,7 @@ const BackendBoilerPlate = () => {
   return (
     <div>
       <Header
-        title="Backend NodeJS Boilerplate"
+        title="BACKEND NODEJS BOILERPLATE"
         subtitle="Easiest way to setup your backend"
       >
         <img src={Nodejs} alt="Not found" />

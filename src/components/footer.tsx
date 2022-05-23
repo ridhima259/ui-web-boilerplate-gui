@@ -12,26 +12,47 @@ const footer = () => (
       </p>
     </div>
     <div>
-      <img
-        className="ml-2 w-4 lg:ml-5 xl:w-6 inline cursor-pointer"
-        src={twitter}
-        alt="Not found"
-      />
-      <img
-        className="ml-2 w-4 lg:ml-5 xl:w-6 inline cursor-pointer"
-        src={facebook}
-        alt="Not found"
-      />
-      <img
-        className="ml-2 w-4 lg:ml-5 xl:w-6 inline cursor-pointer"
-        src={linkedin}
-        alt="Not found"
-      />
-      <img
-        className="ml-2 w-4 lg:ml-5 xl:w-6 inline cursor-pointer"
-        src={youtube}
-        alt="Not found"
-      />
+      <a href="https://twitter.com/fibonalabs" target="_blank" rel="noreferrer">
+        <img
+          className="ml-2 w-4 lg:ml-5 xl:w-6 inline cursor-pointer"
+          src={twitter}
+          alt="Not found"
+        />
+      </a>
+      <a
+        href="https://www.facebook.com/fibonalabs"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          className="ml-2 w-4 lg:ml-5 xl:w-6 inline cursor-pointer"
+          src={facebook}
+          alt="Not found"
+        />
+      </a>
+      <a
+        href="https://www.linkedin.com/company/fibonalabs/"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          className="ml-2 w-4 lg:ml-5 xl:w-6 inline cursor-pointer"
+          src={linkedin}
+          alt="Not found"
+        />
+      </a>
+
+      <a
+        href="https://www.youtube.com/channel/UCkJDB2uoWVUlGN8Jp27PBtg"
+        target="_blank"
+        rel="noreferrer"
+      >
+        <img
+          className="ml-2 w-4 lg:ml-5 xl:w-6 inline cursor-pointer"
+          src={youtube}
+          alt="Not found"
+        />
+      </a>
     </div>
   </div>
 );

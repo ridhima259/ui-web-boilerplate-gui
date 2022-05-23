@@ -251,7 +251,7 @@ const BoilerPlate = () => {
   return (
     <>
       <Header
-        title="Frontend React Boilerplate"
+        title="FRONTEND REACT BOILERPLATE"
         subtitle="A Quick Setup to build your own application "
       >
         <img src={logo} alt="text" />

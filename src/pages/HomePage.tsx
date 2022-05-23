@@ -15,14 +15,14 @@ import Footer from '../components/footer';
 const Home = () => {
   const Card = (details: navType) => {
     const {
-      name, date, href, desc, readMorehref,
-     } = details;
+      name, date, href, desc, readMorehref, target,
+    } = details;
     console.log('data', name, date);
     return (
       <a
         className="flex flex-col md:flex-row mb-4 mx-3 hover:shadow-3xl"
         href={href}
-        target="_blank"
+        target={target}
         rel="noreferrer"
       >
         {/* <img
@@ -32,17 +32,12 @@ const Home = () => {
         /> */}
         <div className="bg-white w-full  text-black p-7 gap-3 rounded-lg">
           <p className="text-md font-extrabold truncate">{name}</p>
-          {/* <p className="text-sm inline-block w-80 truncate">
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quam vitae
-            commodi ex in, dolore placeat soluta at doloribus nostrum sed
-            voluptatem, odit consequuntur vel suscipit veniam dolorem officia
-            repudiandae maxime.
-          </p> */}
+
           <p className=" text-sm text-grey py-0 mt-4 truncate">{desc}</p>
-          <p className="text-sm text-grey py-0">
+          {/* <p className="text-sm text-grey py-0">
             Created in &nbsp;
             {date}
-          </p>
+          </p> */}
           <div className="mt-5 flex justify-between">
             <div>
               <img className="mr-2 inline" src={downloadIcon} alt="Not found" />
@@ -97,6 +92,7 @@ const Home = () => {
               href={data.href}
               date={data.date}
               desc={data.desc}
+              target={data.target}
             />
           ))}
         </div>
