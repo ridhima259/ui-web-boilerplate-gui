@@ -6,8 +6,8 @@ import Header from '../components/headerHome';
 // import fibLogo from '../assets/svg/image.svg';
 import { navType, navList } from '../assets/data/content';
 import Layout from '../components/layout';
-import downloadIcon from '../assets/svg/download.svg';
-import heartIcon from '../assets/svg/heart.svg';
+// import downloadIcon from '../assets/svg/download.svg';
+// import heartIcon from '../assets/svg/heart.svg';
 import arrowRight from '../assets/svg/arrow-right.svg';
 import fibLogo from '../assets/svg/fibLogo.svg';
 import Footer from '../components/footer';
@@ -40,10 +40,10 @@ const Home = () => {
           </p> */}
           <div className="mt-5 flex justify-between">
             <div>
-              <img className="mr-2 inline" src={downloadIcon} alt="Not found" />
+              {/* <img className="mr-2 inline" src={downloadIcon} alt="Not found" />
               <span>10</span>
               <img className="ml-5  inline" src={heartIcon} alt="Not found" />
-              <span className=" ml-2  ">10</span>
+              <span className=" ml-2  ">10</span> */}
             </div>
             <div>
               <a

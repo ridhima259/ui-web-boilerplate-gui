@@ -26,7 +26,7 @@ const BackendBoilerPlate = () => {
     const { name, desc } = props;
 
     return (
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center py-20">
         <button
           type="button"
           className={

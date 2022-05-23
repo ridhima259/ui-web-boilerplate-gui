@@ -257,7 +257,7 @@ const BoilerPlate = () => {
         <img src={logo} alt="text" />
       </Header>
       <Layout backButton alert={alert}>
-        <div className="flex flex-col md:flex-row gap-5">
+        <div className="flex flex-col py-20 md:flex-row gap-5">
           <div className="flex-1 items-center ">
             <Steps
               current={step}
