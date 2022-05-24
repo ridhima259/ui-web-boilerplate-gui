@@ -79,7 +79,7 @@ export const navList: navType[] = [
       'http://project.fibonalabs.com/projects/live-chat/wiki/wiki/toc',
     href: 'http://project.fibonalabs.com/projects/live-chat/',
     target: '_blank',
-    desc: 'Description not available .......',
+    desc: ' ',
   },
   {
     name: 'Live Chat- Firebase',
@@ -88,7 +88,7 @@ export const navList: navType[] = [
       'http://project.fibonalabs.com/projects/live-chat/wiki/wiki/toc',
     href: 'http://project.fibonalabs.com/projects/live-chat/',
     target: '_blank',
-    desc: 'Description not available .......',
+    desc: ' ',
   },
   {
     name: 'Image Optimizer',
@@ -97,10 +97,10 @@ export const navList: navType[] = [
       'http://project.fibonalabs.com/projects/image-resizer/wiki/wiki/toc',
     href: 'http://project.fibonalabs.com/projects/image-resizer/',
     target: '_blank',
-    desc: 'Description not available .......',
+    desc: '',
   },
   {
-    name: 'Communication Framework',
+    name: 'Just Communicate',
     date: 'January 2022',
     readMorehref:
       'http://project.fibonalabs.com/projects/communication-framework/wiki/wiki',
@@ -123,7 +123,7 @@ export const navList: navType[] = [
     readMorehref: 'https://www.npmjs.com/package/@fibonalabs/utility',
     href: 'https://www.npmjs.com/package/@fibonalabs/utility',
     target: '_blank',
-    desc: 'Description not available .......',
+    desc: '',
   },
   {
     name: 'Comment Module',
@@ -133,23 +133,6 @@ export const navList: navType[] = [
     href: 'http://project.fibonalabs.com/projects/comment-module/',
     target: '_blank',
     desc: 'Comment Module is the utility that can be used to achieve nested comments which can help you to define approach of having comments on various post,images and etc.',
-  },
-  {
-    name: 'Server less Boilerplate',
-    date: 'January 2022',
-    readMorehref: '/',
-    href: '/',
-    target: '',
-    desc: 'Description not available .......',
-  },
-  {
-    name: 'Web-React-Boilerplate',
-    date: 'January 2022',
-    readMorehref:
-      'http://project.fibonalabs.com/projects/web-react-boilerplate/wiki/web-react-boilerplate',
-    href: 'http://project.fibonalabs.com/projects/web-react-boilerplate/',
-    target: '_blank',
-    desc: 'Boilerplate is like a part of code that can be reused many times to repeat some piece of codes again and again. It is a section of code that is used interchangeably to provide this or that function. When using languages that are considered verbose, developers have to code a lot to accomplish only minor functionality. This will help you reduce developing time by copying the parts of code.',
   },
 ];
 
