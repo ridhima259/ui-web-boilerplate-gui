@@ -33,7 +33,7 @@ const Home = () => {
         <div className="bg-white w-full  text-black p-7 gap-3 rounded-lg">
           <p className="text-md font-extrabold truncate">{name}</p>
 
-          <p className=" text-sm text-grey py-0 mt-4 truncate">{desc}</p>
+          <p className=" text-sm text-grey py-0 mt-4 line-clamp-3">{desc}</p>
           {/* <p className="text-sm text-grey py-0">
             Created in &nbsp;
             {date}
