@@ -26,7 +26,7 @@ const BackendBoilerPlate = () => {
     const { name, desc } = props;
 
     return (
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center py-20">
         <button
           type="button"
           className={
@@ -63,7 +63,7 @@ const BackendBoilerPlate = () => {
   return (
     <div>
       <Header
-        title="Backend NodeJS Boilerplate"
+        title="BACKEND NODEJS BOILERPLATE"
         subtitle="Easiest way to setup your backend"
       >
         <img src={Nodejs} alt="Not found" />

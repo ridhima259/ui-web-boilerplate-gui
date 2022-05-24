@@ -5,6 +5,9 @@ export type navType = {
   name: string;
   date: string;
   href: string;
+  desc: string;
+  readMorehref: string;
+  target: string;
 };
 export const frameworkContent: keyable = {
   0: {
@@ -47,12 +50,106 @@ export const navList: navType[] = [
   {
     name: 'React Frontend Boilerpate',
     date: 'January 2022',
+    readMorehref: '/react-boilerplate',
     href: '/react-boilerplate',
+    target: '',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
   },
   {
     name: 'Backend NodeJS Boilerplate',
     date: 'January 2022',
+    readMorehref: '/backend-boilerplate',
     href: '/backend-boilerplate',
+    target: '',
+    desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
+  },
+  {
+    name: 'PDF Generator',
+    date: 'January 2022',
+    readMorehref:
+      'http://project.fibonalabs.com/projects/pdf-generator/wiki/wiki',
+    href: 'http://project.fibonalabs.com/projects/pdf-generator/',
+    target: '_blank',
+    desc: 'Pdf generator is a Pdf document generation library for Node and the browser that makes creating complex, multi-page, printable documents easy both with server and server less. The API embraces chain-ability, and includes both low level functions as well as abstractions for higher level functionality. These API is designed to be simple, so generating complex documents is often as simple as a few function calls. This Module can run both in server and serverless as per the developer need. It will convert the HTML into the Pdf format.',
+  },
+  {
+    name: 'Live Chat- Socket.IO',
+    date: 'January 2022',
+    readMorehref:
+      'http://project.fibonalabs.com/projects/live-chat/wiki/wiki/toc',
+    href: 'http://project.fibonalabs.com/projects/live-chat/',
+    target: '_blank',
+    desc: 'Description not available .......',
+  },
+  {
+    name: 'Live Chat- Firebase',
+    date: 'January 2022',
+    readMorehref:
+      'http://project.fibonalabs.com/projects/live-chat/wiki/wiki/toc',
+    href: 'http://project.fibonalabs.com/projects/live-chat/',
+    target: '_blank',
+    desc: 'Description not available .......',
+  },
+  {
+    name: 'Image Optimizer',
+    date: 'January 2022',
+    readMorehref:
+      'http://project.fibonalabs.com/projects/image-resizer/wiki/wiki/toc',
+    href: 'http://project.fibonalabs.com/projects/image-resizer/',
+    target: '_blank',
+    desc: 'Description not available .......',
+  },
+  {
+    name: 'Communication Framework',
+    date: 'January 2022',
+    readMorehref:
+      'http://project.fibonalabs.com/projects/communication-framework/wiki/wiki',
+    href: 'http://project.fibonalabs.com/projects/communication-framework/',
+    target: '_blank',
+    desc: 'Communication Framework is the utility components that can be used to achieve the list of pre-defined features which can help you to implement the communication methods in your project.',
+  },
+  {
+    name: 'Captcha Generator',
+    date: 'January 2022',
+    readMorehref:
+      'http://project.fibonalabs.com/projects/captcha-generator/wiki/wiki',
+    href: 'http://project.fibonalabs.com/projects/captcha-generator/',
+    target: '_blank',
+    desc: 'Captcha Generator is a Node library for quickly and easily generating captcha images that can be used through an authorized bot to verify human users on a chat platform such as Slack or Discord.',
+  },
+  {
+    name: 'Utility',
+    date: 'January 2022',
+    readMorehref: 'https://www.npmjs.com/package/@fibonalabs/utility',
+    href: 'https://www.npmjs.com/package/@fibonalabs/utility',
+    target: '_blank',
+    desc: 'Description not available .......',
+  },
+  {
+    name: 'Comment Module',
+    date: 'January 2022',
+    readMorehref:
+      'http://project.fibonalabs.com/projects/comment-module/wiki/wiki',
+    href: 'http://project.fibonalabs.com/projects/comment-module/',
+    target: '_blank',
+    desc: 'Comment Module is the utility that can be used to achieve nested comments which can help you to define approach of having comments on various post,images and etc.',
+  },
+  {
+    name: 'Server less Boilerplate',
+    date: 'January 2022',
+    readMorehref: '/',
+    href: '/',
+    target: '',
+    desc: 'Description not available .......',
+  },
+  {
+    name: 'Web-React-Boilerplate',
+    date: 'January 2022',
+    readMorehref:
+      'http://project.fibonalabs.com/projects/web-react-boilerplate/wiki/web-react-boilerplate',
+    href: 'http://project.fibonalabs.com/projects/web-react-boilerplate/',
+    target: '_blank',
+    desc: 'Boilerplate is like a part of code that can be reused many times to repeat some piece of codes again and again. It is a section of code that is used interchangeably to provide this or that function. When using languages that are considered verbose, developers have to code a lot to accomplish only minor functionality. This will help you reduce developing time by copying the parts of code.',
   },
 ];
 
