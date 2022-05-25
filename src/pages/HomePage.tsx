@@ -30,7 +30,7 @@ const Home = () => {
           src={href.includes('backend') ? Nodejs : logo}
           alt="No text"
         /> */}
-        <div className="bg-white w-full  text-black p-7 gap-3 rounded-lg h-48 relative">
+        <div className="bg-white w-full  text-black p-7 gap-3 rounded-lg  relative">
           <p className="text-md font-extrabold truncate">{name}</p>
 
           <p className=" text-sm text-grey py-0 mt-4 line-clamp-3">{desc}</p>
@@ -45,7 +45,7 @@ const Home = () => {
               <img className="ml-5  inline" src={heartIcon} alt="Not found" />
               <span className=" ml-2  ">10</span> */}
             </div>
-            <div className="absolute right-5 bottom-5">
+            <div className="absolute right-5 bottom-3">
               <a
                 href={readMorehref}
                 target={target}
