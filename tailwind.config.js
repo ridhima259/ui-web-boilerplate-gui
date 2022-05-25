@@ -32,5 +32,6 @@ module.exports = {
       animation: ['hover'],
     },
   },
-  plugins: [],
+  // eslint-disable-next-line global-require
+  plugins: [require('@tailwindcss/line-clamp')],
 };
