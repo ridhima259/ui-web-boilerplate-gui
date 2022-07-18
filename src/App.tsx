@@ -9,6 +9,7 @@ import JustCommunication from './pages/JustCommunication';
 import CaptchaGenerator from './pages/CaptchaGenerator';
 import Commentmodule from './pages/CommentModule';
 import Utility from './pages/Utility';
+import ReactNative from './pages/ReactNative';
 
 function App() {
   return (
@@ -37,6 +38,9 @@ function App() {
         </Route>
         <Route exact path="/utility">
           <Utility />
+        </Route>
+        <Route exact path="/react-native">
+          <ReactNative />
         </Route>
       </Switch>
     </Router>

@@ -8,7 +8,7 @@ interface LayoutInterface {
 }
 const Layout: React.FC<LayoutInterface> = ({ children, backButton, alert }) => (
   <>
-    <div className="main py-24 px-4 md:px-10 lg:py-28 lg:px-10 xl:py-28 xl:py-20 bg-homebg w-full 2xl:h-screen">
+    <div className="main py-24 px-4 md:px-10 lg:py-28 lg:px-10 xl:py-28 xl:py-20 bg-homebg w-full h-full 2xl:h-full">
       {alert ? (
         <div
           className="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded fixed w-auto right-2 top-2"
