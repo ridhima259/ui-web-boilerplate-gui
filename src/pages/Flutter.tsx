@@ -290,7 +290,7 @@ const Flutter = () => (
             <li>
               Please refer the attached document for information:
               <a
-                className="text-blue-400"
+                className="text-blue-400 ml-1"
                 href=" https://firebase.flutter.dev/docs/overview"
               >
                 https://firebase.flutter.dev/docs/overview

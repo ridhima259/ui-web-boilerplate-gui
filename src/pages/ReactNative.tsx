@@ -281,7 +281,7 @@ const ReactNative = () => (
           <ul className="list-disc px-7 py-3">
             <li>
               Please refer the attached document for information:
-              <a className="text-blue-400" href=" https://rnfirebase.io/">
+              <a className="text-blue-400 ml-1" href=" https://rnfirebase.io/">
                 https://rnfirebase.io/
               </a>
             </li>
