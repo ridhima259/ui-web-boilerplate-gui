@@ -278,7 +278,14 @@ const ReactNative = () => (
         </div>
         <div>
           <div className="text-3xl py-3 font-extrabold">FireBase</div>
-          <p className="pb-2">needed</p>
+          <ul className="list-disc px-7 py-3">
+            <li>
+              Please refer the attached document for information:
+              <a className="text-blue-400" href=" https://rnfirebase.io/">
+                https://rnfirebase.io/
+              </a>
+            </li>
+          </ul>
         </div>
         <div>
           <div className="text-3xl py-3 font-extrabold">Mirage</div>

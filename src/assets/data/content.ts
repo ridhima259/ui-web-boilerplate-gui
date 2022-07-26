@@ -48,7 +48,7 @@ export const uiKitContent: keyable = {
 
 export const navList: navType[] = [
   {
-    name: 'React Frontend Boilerpate',
+    name: 'React Frontend Boilerplate',
     date: 'January 2022',
     readMorehref: '/react-boilerplate',
     href: '/react-boilerplate',
@@ -128,13 +128,22 @@ export const navList: navType[] = [
     desc: 'Comment Module is the utility that can be used to achieve nested comments which can help you to define approach of having comments on various post,images and etc.',
   },
   {
-    name: 'React Native',
+    name: 'React Native Boilerplate',
     date: 'January 2022',
     readMorehref: '/react-native',
     href: '/react-native',
     target: '',
     desc: "Boilerplate contains all you need to start your next React.js project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
   },
+  {
+    name: 'Flutter Boilerplate',
+    date: 'July 2022',
+    readMorehref: '/flutter',
+    href: '/flutter',
+    target: '',
+    desc: "Boilerplate contains all you need to start your next Flutter project. Simple, robust, well-organized, all you need to do is clone, install and you're ready to start.",
+  },
 ];
 
+// prettier-ignore
 export const title = 'A backend boilerplate is a starter project for quickly building RESTful APIs using Node.js with the Docker Support. By running a single command, you will get a production-ready Node.js app installed and fully configured on your machine. The app comes with many built-in features, such as authentication using JWT, request validation, unit and integration tests, continuous integration, docker support, API documentation, pagination, etc.';
