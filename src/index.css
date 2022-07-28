@@ -14,3 +14,44 @@
     animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
   }
 }
+
+.preview h1 {
+  box-sizing: border-box;
+  color: var(--base-colour);
+  font-family: var(--base-font-family);
+  font-size: 2em;
+  font-weight: 600;
+  line-height: 1.25;
+  margin: 24px 0 16px;
+  padding-bottom: 0.3em;
+  word-wrap: break-word;
+  border-bottom: 1px solid #eaecef;
+}
+
+.preview p {
+  margin-bottom: 16px;
+}
+
+.preview h2,
+.preview h3 {
+  box-sizing: border-box;
+  color: var(--base-colour);
+  font-family: var(--base-font-family);
+  font-weight: 600;
+  line-height: 1.25;
+  margin-bottom: 16px;
+  margin-top: 24px;
+  padding-bottom: 0.3em;
+  word-wrap: break-word;
+  border-bottom: 1px solid #eaecef;
+}
+
+.preview a {
+  box-sizing: border-box;
+  color: #0366d6;
+  cursor: pointer;
+  font-family: var(--base-font-family);
+  line-height: 24px;
+  text-decoration: none;
+  word-wrap: break-word;
+}
