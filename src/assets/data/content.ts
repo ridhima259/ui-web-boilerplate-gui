@@ -1,3 +1,6 @@
+import GettingStarted from '@/src/pages/GettingStarted';
+import Home from '@/src/pages/HomePage';
+
 interface keyable {
   [uikit: number]: any;
 }
@@ -8,6 +11,12 @@ export type navType = {
   desc: string;
   readMorehref: string;
   target: string;
+};
+
+export type stackNavType = {
+  id: string;
+  routes: string;
+  component: any;
 };
 export const frameworkContent: keyable = {
   0: {
@@ -143,4 +152,17 @@ export const addModuleData: any = [
   { name: 'Contributing' },
   { name: 'Demo' },
   { name: 'Deployement' },
+];
+
+export const stackNavList: stackNavType[] = [
+  {
+    id: '1',
+    routes: '/',
+    component: GettingStarted,
+  },
+  {
+    id: '2',
+    routes: '/homepage',
+    component: Home,
+  },
 ];
