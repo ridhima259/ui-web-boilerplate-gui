@@ -180,7 +180,7 @@ const GettingStarted = () => (
             <br />
             on all your users&apos; devices
           </p>
-          <a className="css-1w1veeg" href="/homepage">
+          <a className="css-1w1veeg" href="/viewpage">
             <div className="css-1fabzl3">
               <div className="css-d7mh5i">Get Started</div>
             </div>

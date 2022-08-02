@@ -1,5 +1,6 @@
 import GettingStarted from '@/src/pages/GettingStarted';
 import Home from '@/src/pages/HomePage';
+import ViewPage from '@/src/pages/ViewPage';
 
 interface keyable {
   [uikit: number]: any;
@@ -18,6 +19,13 @@ export type stackNavType = {
   routes: string;
   component: any;
 };
+
+export type attributes = {
+  name: string;
+  title: string;
+  desc: string;
+};
+
 export const frameworkContent: keyable = {
   0: {
     name: '',
@@ -162,7 +170,60 @@ export const stackNavList: stackNavType[] = [
   },
   {
     id: '2',
+    routes: '/viewpage',
+    component: ViewPage,
+  },
+  {
+    id: '3',
     routes: '/homepage',
     component: Home,
+  },
+];
+
+export const apiData: attributes[] = [
+  {
+    name: 'React Native',
+    title: 'React Native',
+    desc: 'Build one JavaScript/TypeScript project that runs natively on all your users devices.',
+  },
+  {
+    name: 'React Native 2',
+    title: 'React Native 2',
+    desc: 'Build one JavaScript/TypeScript project that runs natively on all your users devices.',
+  },
+  {
+    name: 'React Native 3',
+    title: 'React Native 3',
+    desc: 'Build one JavaScript/TypeScript project that runs natively on all your users devices.',
+  },
+  {
+    name: 'React Native 4',
+    title: 'React Native 4',
+    desc: 'Build one JavaScript/TypeScript project that runs natively on all your users devices.',
+  },
+  {
+    name: 'React Native 5',
+    title: 'React Native 5',
+    desc: 'Build one JavaScript/TypeScript project that runs natively on all your users devices.',
+  },
+  {
+    name: 'React Native 6',
+    title: 'React Native 6',
+    desc: 'Build one JavaScript/TypeScript project that runs natively on all your users devices.',
+  },
+  {
+    name: 'React Native 7',
+    title: 'React Native 7',
+    desc: 'Build one JavaScript/TypeScript project that runs natively on all your users devices.',
+  },
+  {
+    name: 'React Native 8',
+    title: 'React Native 8',
+    desc: 'Build one JavaScript/TypeScript project that runs natively on all your users devices.',
+  },
+  {
+    name: 'React Native 9',
+    title: 'React Native 9',
+    desc: 'Build one JavaScript/TypeScript project that runs natively on all your users devices.',
   },
 ];
