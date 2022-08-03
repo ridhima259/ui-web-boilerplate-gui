@@ -1,3 +1,4 @@
+import AddModule from '@/src/pages/AddModule';
 import GettingStarted from '@/src/pages/GettingStarted';
 import Home from '@/src/pages/HomePage';
 import ViewPage from '@/src/pages/ViewPage';
@@ -177,6 +178,11 @@ export const stackNavList: stackNavType[] = [
     id: '3',
     routes: '/homepage',
     component: Home,
+  },
+  {
+    id: '3',
+    routes: '/add-module',
+    component: AddModule,
   },
 ];
 

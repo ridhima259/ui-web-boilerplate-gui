@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { Modal } from 'antd';
+import { Modal, Input } from 'antd';
 import 'antd/dist/antd.css';
 import { Editor } from 'react-draft-wysiwyg';
-// import draftToHtml from 'draftjs-to-html';
-import { EditorState } from 'draft-js';
+import draftToHtml from 'draftjs-to-html';
+import { EditorState, convertToRaw } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import Header from '../components/header';
 // import twitter from '../assets/svg/twitter.svg';
@@ -14,10 +14,18 @@ const AddModule = () => {
   const [addModal, showModal] = useState(false);
   // prettier-ignore
   const [edState, setEditorState] = React.useState(() => EditorState.createEmpty());
+  const [content, setContent] = React.useState([
+    {
+      title: '',
+      desc: '',
+    },
+  ]);
+  const [name, setName] = useState('');
 
   const onEditorStateChange = (
     editorState: React.SetStateAction<EditorState>,
   ) => {
+    console.log('editorState', editorState);
     setEditorState(editorState);
   };
 
@@ -59,22 +67,20 @@ const AddModule = () => {
                         aria-describedby="DndDescribedBy-0"
                         className="bg-white dark:bg-gray-200 shadow rounded-md pl-1 pr-14 py-2 flex items-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 relative select-none"
                       >
-                        {/* <button
-                          type="button"
-                          className="mr-1 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400"
-                        >
-                          <img
-                            className="w-5 h-5"
-                            src={twitter}
-                            alt="Not found"
-                          />
-                        </button> */}
                         <span className="mt-3 mb-3">{data.name}</span>
                         <button
                           className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 absolute right-8"
                           type="button"
                           aria-label="Reset section"
                           onClick={() => {
+                            setName(data.name);
+                            const obj = content.find(
+                              (o) => o.title === data.name,
+                            );
+                            console.log('obj', obj);
+                            // prettier-ignore
+                            // const obj1 = ContentState.createFromText(obj.desc);
+                            // setEditorState(EditorState.createWithContent(obj1));
                             showModal(true);
                             console.log('clicked');
                           }}
@@ -96,7 +102,7 @@ const AddModule = () => {
 
           <div className="px-3 flex-1">
             <div className="h-full preview-width md:w-auto border border-gray-500 rounded-md p-6 preview bg-white full-screen overflow-x-scroll md:overflow-x-auto overflow-y-scroll">
-              <h1>Title</h1>
+              {/* <h1>Title</h1>
               <p>
                 Lorem Ipsum is simply dummy text of the printing and typesetting
                 industry. Lorem Ipsum has been the industry&apos;s standard
@@ -110,7 +116,13 @@ const AddModule = () => {
                   https://readme.so/editor
                 </a>
               </p>
-              <h2>Acknowledgements</h2>
+              <h2>Acknowledgements</h2> */}
+              {content.map((data) => (
+                <div>
+                  <h1>{data.title}</h1>
+                  <div dangerouslySetInnerHTML={{ __html: data.desc }} />
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -119,23 +131,51 @@ const AddModule = () => {
       <Modal
         title="Add Module"
         visible={addModal}
-        onOk={() => showModal(false)}
+        onOk={() => {
+          const updatedData = [
+            ...content,
+            {
+              title: name,
+              desc: draftToHtml(convertToRaw(edState.getCurrentContent())),
+            },
+          ];
+          // setContent(
+          //   content + draftToHtml(convertToRaw(edState.getCurrentContent())),
+          // );
+          setContent(updatedData);
+          localStorage.setItem('my_json', JSON.stringify(content));
+          showModal(false);
+          setEditorState(EditorState.createEmpty());
+          setName('');
+          console.log('ls', localStorage.getItem('my_json'));
+        }}
         onCancel={() => showModal(false)}
         width={1000}
         bodyStyle={{ height: 400 }}
       >
+        <div className="employee_details_box">
+          <div className="header_items">
+            <span>Title</span>
+          </div>
+          <div className="input_area">
+            <Input
+              style={{ height: 30 }}
+              value={name}
+              onChange={(e) => {
+                // console.log('e', e.target.value);
+                setName(e.target.value);
+              }}
+            />
+          </div>
+        </div>
         <div>
           <Editor
             editorState={edState}
             wrapperClassName="demo-wrapper"
             editorClassName="demo-editor"
             onEditorStateChange={onEditorStateChange}
-            editorStyle={{ backgroundColor: 'lightgrey', height: 300 }}
+            editorStyle={{ height: 200 }}
           />
-          {/* <textarea
-            disabled
-            value={draftToHtml(convertToRaw(edState.getCurrentContent()))}
-          /> */}
         </div>
       </Modal>
     </div>
