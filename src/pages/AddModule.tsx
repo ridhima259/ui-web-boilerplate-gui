@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Gist from 'react-gist';
 import { Modal, Input } from 'antd';
 import 'antd/dist/antd.css';
 import { Editor } from 'react-draft-wysiwyg';
@@ -22,7 +23,8 @@ const AddModule = () => {
   const [edState, setEditorState] = React.useState(() => EditorState.createEmpty());
   const [content, setContent] = React.useState([
     {
-      id: 0,
+      id: -1,
+      dp: 0,
       title: '',
       desc: '',
     },
@@ -30,12 +32,126 @@ const AddModule = () => {
   const [name, setName] = useState('');
   const [val, setVal] = useState(0);
   const [id, setID] = useState(0);
+  const [dp, setDp] = useState(-1);
+  const [type, setType] = useState('');
+  const [gistData, setGistData] = useState('');
 
   const onEditorStateChange = (
     editorState: React.SetStateAction<EditorState>,
   ) => {
     setEditorState(editorState);
   };
+
+  const resetButtonClicked = (data: {
+    type: any;
+    id: any;
+    dp: React.SetStateAction<number>;
+  }) => {
+    setID(data.id);
+    setDp(data.dp);
+    setName('');
+    setType(data.type);
+    const obj = content.find((o) => o.dp === data.dp);
+    console.log('obj', obj);
+    if (type === 'Heading' || type === 'Description' || type === 'Usage') {
+      if (obj) {
+        setName(obj.desc);
+      }
+    }
+    if (data.type === 'Api Reference') {
+      if (obj) {
+        const html = obj.desc;
+        const blocksFromHTML = convertFromHTML(html);
+        const block = ContentState.createFromBlockArray(
+          blocksFromHTML.contentBlocks,
+          blocksFromHTML.entityMap,
+        );
+        setEditorState(EditorState.createWithContent(block));
+        setName(obj.title);
+      }
+    }
+    showModal(true);
+  };
+
+  const deleteButtonClicked = (
+    data: {
+      type: any;
+      id?: React.SetStateAction<number>;
+      dp?: React.SetStateAction<number>;
+    },
+    index: any,
+  ) => {
+    console.log('content', content);
+    const deleteIndex = content.findIndex((item: any) => item.dp === data.dp);
+    if (deleteIndex !== -1) {
+      content.splice(deleteIndex, 1);
+    }
+    setVal(val - 1);
+    addModuleData.splice(index, 1);
+  };
+
+  const onCancelModal = () => {
+    setID(0);
+    setDp(-1);
+    showModal(false);
+    setEditorState(EditorState.createEmpty());
+  };
+
+  const onOkModal = () => {
+    const obj = content.find((o) => o.dp === dp);
+    if (obj) {
+      content.map((item) => {
+        if (item.dp === dp) {
+          if (type === 'Api Reference') {
+            // eslint-disable-next-line no-param-reassign
+            item.title = 'Api Reference';
+            // eslint-disable-next-line no-param-reassign
+            item.desc = draftToHtml(convertToRaw(edState.getCurrentContent()));
+          } else {
+            // eslint-disable-next-line no-param-reassign
+            item.title = type;
+            // eslint-disable-next-line no-param-reassign
+            item.desc = name;
+          }
+        }
+
+        return item;
+      });
+    } else {
+      console.log('else');
+      if (type === 'Api Reference') {
+        const updatedData = [
+          ...content,
+          {
+            id,
+            dp,
+            title: 'Api Reference',
+            desc: draftToHtml(convertToRaw(edState.getCurrentContent())),
+          },
+        ];
+        setContent(updatedData);
+      } else {
+        const updatedData = [
+          ...content,
+          {
+            id,
+            dp,
+            title: type,
+            desc: name,
+          },
+        ];
+        setContent(updatedData);
+      }
+    }
+
+    localStorage.setItem('my_json', JSON.stringify(content));
+    showModal(false);
+    setEditorState(EditorState.createEmpty());
+    setName('');
+    setID(0);
+    console.log('jsondata', localStorage.getItem('my_json'));
+  };
+
   return (
     <div>
       <Header
@@ -59,7 +175,11 @@ const AddModule = () => {
                 <ul className="mb-12 space-y-3">
                   {addModuleData.map(
                     (
-                      data: { name: any; id: React.SetStateAction<number> },
+                      data: {
+                        type: any;
+                        id: React.SetStateAction<number>;
+                        dp: React.SetStateAction<number>;
+                      },
                       index: any,
                     ) => (
                       <button
@@ -68,30 +188,14 @@ const AddModule = () => {
                         onClick={() => setEnableButton(index)}
                         className="w-full bg-white dark:bg-gray-200 shadow rounded-md pl-1 pr-14 py-2 flex items-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 relative select-none"
                       >
-                        <span className="mt-3 mb-3">{data.name}</span>
+                        <span className="mt-3 mb-3">{data.type}</span>
                         {enableButton === index && (
                           <button
                             className="focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 absolute right-8"
                             type="button"
                             aria-label="Reset section"
                             onClick={() => {
-                              setID(data.id);
-                              setName(data.name);
-                              const obj = content.find((o) => o.id === data.id);
-                              console.log('obj', obj);
-                              if (obj) {
-                                const html = obj.desc;
-                                const blocksFromHTML = convertFromHTML(html);
-                                const block = ContentState.createFromBlockArray(
-                                  blocksFromHTML.contentBlocks,
-                                  blocksFromHTML.entityMap,
-                                );
-                                setEditorState(
-                                  EditorState.createWithContent(block),
-                                );
-                                setName(obj.title);
-                              }
-                              showModal(true);
+                              resetButtonClicked(data);
                             }}
                           >
                             <img
@@ -107,14 +211,7 @@ const AddModule = () => {
                             type="button"
                             aria-label="Delete section"
                             onClick={() => {
-                              const deleteIndex = content.findIndex(
-                                (item: any) => item.title === data.name,
-                              );
-                              content.splice(deleteIndex, 1);
-                              setVal(val - 1);
-                              selectModuleData.push(
-                                addModuleData.splice(index, 1)[0],
-                              );
+                              deleteButtonClicked(data, index);
                             }}
                           >
                             <img
@@ -135,22 +232,33 @@ const AddModule = () => {
                   Click on a section below to add it to your preview
                 </h4>
                 <ul className="mb-12 space-y-3">
-                  {selectModuleData.map((data: { name: any }, index: any) => (
-                    <button
-                      className="w-full bg-white dark:bg-gray-200 shadow rounded-md pl-1 pr-14 py-2 flex items-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 relative select-none"
-                      type="button"
-                      aria-label="Select section"
-                      onClick={() => {
-                        setEnableButton(-1);
-                        setVal(val + 1);
-                        addModuleData.push(
-                          selectModuleData.splice(index, 1)[0],
-                        );
-                      }}
-                    >
-                      <span className="mt-3 mb-3">{data.name}</span>
-                    </button>
-                  ))}
+                  {selectModuleData.map(
+                    (data: { type: any; id: any }, index: any) => (
+                      <button
+                        className="w-full bg-white dark:bg-gray-200 shadow rounded-md pl-1 pr-14 py-2 flex items-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-400 relative select-none"
+                        type="button"
+                        aria-label="Select section"
+                        onClick={() => {
+                          setEnableButton(-1);
+                          setVal(val + 1);
+                          const obj = {
+                            id: Number,
+                            type: String,
+                            dp: Number,
+                          };
+                          const len = addModuleData.length;
+                          obj.id = selectModuleData[index].id;
+                          obj.type = selectModuleData[index].type;
+                          obj.dp = addModuleData[len - 1].dp + 1;
+
+                          addModuleData.push(obj);
+                          console.log('addModuleData', addModuleData);
+                        }}
+                      >
+                        <span className="mt-3 mb-3">{data.type}</span>
+                      </button>
+                    ),
+                  )}
                 </ul>
               </div>
             </div>
@@ -158,25 +266,24 @@ const AddModule = () => {
 
           <div className="px-3 flex-1">
             <div className="h-full preview-width md:w-auto border border-gray-500 rounded-md p-6 preview bg-white full-screen overflow-x-scroll md:overflow-x-auto overflow-y-scroll">
-              {/* <h1>Title</h1>
-              <p>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry. Lorem Ipsum has been the industry&apos;s standard
-                dummy text ever since the 1500s, when an unknown printer took a
-                galley of type and scrambled it to make a type specimen book.
-              </p>
-              <h2>Usage</h2>
-              <p>
-                For more info visit:
-                <a href="https://readme.so/editor" target="">
-                  https://readme.so/editor
-                </a>
-              </p>
-              <h2>Acknowledgements</h2> */}
               {content.map((data) => (
                 <div>
-                  <h1>{data.title}</h1>
-                  <div dangerouslySetInnerHTML={{ __html: data.desc }} />
+                  {data.id === 1 && <h1>{data.desc}</h1>}
+                  {data.id === 2 && <p>{data.desc}</p>}
+                  {data.id === 3 && (
+                    <div>
+                      <h1>Usage</h1>
+                      <Gist id={gistData} />
+                    </div>
+                  )}
+                  {data.id === 4 && (
+                    <div>
+                      <h1>Api Reference</h1>
+                      <div dangerouslySetInnerHTML={{ __html: data.desc }} />
+                    </div>
+                  )}
+
+                  {/* <div dangerouslySetInnerHTML={{ __html: data.desc }} /> */}
                 </div>
               ))}
             </div>
@@ -184,74 +291,137 @@ const AddModule = () => {
         </div>
       </div>
 
-      <Modal
-        title="Add Module"
-        visible={addModal}
-        onOk={() => {
-          const obj = content.find((o) => o.id === id);
-          if (obj) {
-            content.map((item) => {
-              if (item.id === id) {
-                // eslint-disable-next-line no-param-reassign
-                item.title = name;
-                // eslint-disable-next-line no-param-reassign
-                item.desc = draftToHtml(
-                  convertToRaw(edState.getCurrentContent()),
-                );
-              }
-
-              return item;
-            });
-          } else {
-            const updatedData = [
-              ...content,
-              {
-                id,
-                title: name,
-                desc: draftToHtml(convertToRaw(edState.getCurrentContent())),
-              },
-            ];
-            setContent(updatedData);
-          }
-
-          localStorage.setItem('my_json', JSON.stringify(content));
-          showModal(false);
-          setEditorState(EditorState.createEmpty());
-          setName('');
-          setID(0);
-          console.log('jsondata', localStorage.getItem('my_json'));
-        }}
-        onCancel={() => {
-          setID(0);
-          showModal(false);
-        }}
-        width={1000}
-        bodyStyle={{ height: 400 }}
-      >
-        <div className="employee_details_box">
-          <div className="header_items">
-            <span>Title</span>
+      {type === 'Api Reference' && (
+        <Modal
+          title="Add Module"
+          visible={addModal}
+          onOk={() => {
+            onOkModal();
+          }}
+          onCancel={() => onCancelModal()}
+          width={1000}
+          bodyStyle={{ height: 400 }}
+        >
+          <div>
+            <Editor
+              editorState={edState}
+              wrapperClassName="demo-wrapper"
+              editorClassName="demo-editor"
+              onEditorStateChange={onEditorStateChange}
+              editorStyle={{ height: 200 }}
+              toolbar={{
+                options: [
+                  'inline',
+                  'blockType',
+                  'fontSize',
+                  'fontFamily',
+                  'list',
+                  'textAlign',
+                  'link',
+                  'embedded',
+                ],
+                inline: { inDropdown: true },
+                list: { inDropdown: true },
+                textAlign: { inDropdown: true },
+                link: { inDropdown: true },
+                // history: { inDropdown: true },
+              }}
+            />
           </div>
-          <div className="input_area">
-            <Input
-              style={{ height: 30 }}
+        </Modal>
+      )}
+      {type === 'Heading' && (
+        <Modal
+          title="Add Heading"
+          visible={addModal}
+          onOk={() => {
+            onOkModal();
+          }}
+          onCancel={() => onCancelModal()}
+        >
+          <div className="employee_details_box">
+            <div className="header_items">
+              <span>Title</span>
+            </div>
+            <div className="input_area">
+              <Input
+                style={{ height: 30 }}
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+            </div>
+          </div>
+        </Modal>
+      )}
+
+      {type === 'Description' && (
+        <Modal
+          title="Add Description"
+          visible={addModal}
+          onOk={() => {
+            onOkModal();
+          }}
+          onCancel={() => onCancelModal()}
+          bodyStyle={{ height: 200 }}
+        >
+          <div className="employee_details_box">
+            <div className="header_items">
+              <span>Description</span>
+            </div>
+            <textarea
+              style={{
+                display: 'block',
+                overflow: 'hidden',
+                resize: 'none',
+                width: '100%',
+                height: '150px',
+                outline: 'auto',
+                padding: '5px',
+              }}
+              rows={5}
+              cols={30}
+              placeholder="Add Description"
+              id="myTextarea"
               value={name}
               onChange={(e) => {
                 setName(e.target.value);
               }}
             />
           </div>
-        </div>
-        <div>
-          <Editor
-            editorState={edState}
-            wrapperClassName="demo-wrapper"
-            editorClassName="demo-editor"
-            onEditorStateChange={onEditorStateChange}
-            editorStyle={{ height: 200 }}
-          />
-        </div>
-      </Modal>
+        </Modal>
+      )}
+
+      {type === 'Usage' && (
+        <Modal
+          title="Add Usage"
+          visible={addModal}
+          onOk={() => {
+            setGistData(name);
+            onOkModal();
+          }}
+          onCancel={() => onCancelModal()}
+        >
+          <div className="employee_details_box">
+            <div className="header_items">
+              <span>Add GitGist id</span>
+            </div>
+            <div className="input_area">
+              <Input
+                style={{ height: 30 }}
+                value={name}
+                onChange={(e) => {
+                  setName(e.target.value);
+                }}
+              />
+              <small className="w-100">
+                Help Text : https://gist.github.com/yourname/id
+              </small>
+            </div>
+          </div>
+        </Modal>
+      )}
     </div>
   );
 };

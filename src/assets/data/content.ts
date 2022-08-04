@@ -151,19 +151,15 @@ export const navList: navType[] = [
 export const title = 'A backend boilerplate is a starter project for quickly building RESTful APIs using Node.js with the Docker Support. By running a single command, you will get a production-ready Node.js app installed and fully configured on your machine. The app comes with many built-in features, such as authentication using JWT, request validation, unit and integration tests, continuous integration, docker support, API documentation, pagination, etc.';
 
 export const addModuleData: any = [
-  { name: 'Title and Description', id: 1 },
-  { name: 'Acknowledgements', id: 2 },
+  { type: 'Heading', id: 1, dp: 1 },
+  { type: 'Description', id: 2, dp: 2 },
 ];
 
 export const selectModuleData: any = [
-  { name: 'API Reference', id: 3 },
-  { name: 'Appendix', id: 4 },
-  { name: 'Authors', id: 5 },
-  { name: 'Badges', id: 6 },
-  { name: 'Color Ref', id: 7 },
-  { name: 'Contributing', id: 8 },
-  { name: 'Demo', id: 9 },
-  { name: 'Deployement', id: 10 },
+  { type: 'Heading', id: 1 },
+  { type: 'Description', id: 2 },
+  { type: 'Usage', id: 3 },
+  { type: 'Api Reference', id: 4 },
 ];
 
 export const stackNavList: stackNavType[] = [
