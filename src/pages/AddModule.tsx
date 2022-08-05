@@ -14,27 +14,55 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import Header from '../components/header';
 import Reset from '../assets/svg/reset.svg';
 import Trash from '../assets/svg/trash.svg';
-import { addModuleData, selectModuleData } from '../assets/data/content';
+import { selectModuleData } from '../assets/data/content';
+
+// type dragRef = {
+//   dragItem: number;
+//   dragOverItem: number;
+// };
 
 const AddModule = () => {
   const [addModal, showModal] = useState(false);
   const [enableButton, setEnableButton] = useState(0);
   // prettier-ignore
   const [edState, setEditorState] = React.useState(() => EditorState.createEmpty());
-  const [content, setContent] = React.useState([
-    {
-      id: -1,
-      dp: 0,
-      title: '',
-      desc: '',
-    },
-  ]);
+  // const [content, setContent] = React.useState([
+  //   {
+  //     id: -1,
+  //     dp: 0,
+  //     title: '',
+  //     desc: '',
+  //   },
+  // ]);
   const [name, setName] = useState('');
   const [val, setVal] = useState(0);
   const [id, setID] = useState(0);
   const [dp, setDp] = useState(-1);
   const [type, setType] = useState('');
   const [gistData, setGistData] = useState('');
+  const [addModuleData, setaddModuleData] = React.useState([
+    {
+      type: 'Heading',
+      id: 1,
+      dp: 1,
+      desc: '',
+    },
+    {
+      type: 'Description',
+      id: 2,
+      dp: 2,
+      desc: '',
+    },
+  ]);
+
+  const dragItem = React.useRef<any>(null);
+
+  const dragOverItem = React.useRef<any>(null);
+
+  // const drag = React.useRef<dragRef>({
+  //   dragItem: 0,
+  //   dragOverItem: 0,
+  // });
 
   const onEditorStateChange = (
     editorState: React.SetStateAction<EditorState>,
@@ -51,7 +79,7 @@ const AddModule = () => {
     setDp(data.dp);
     setName('');
     setType(data.type);
-    const obj = content.find((o) => o.dp === data.dp);
+    const obj = addModuleData.find((o) => o.dp === data.dp);
     console.log('obj', obj);
     if (type === 'Heading' || type === 'Description' || type === 'Usage') {
       if (obj) {
@@ -67,7 +95,7 @@ const AddModule = () => {
           blocksFromHTML.entityMap,
         );
         setEditorState(EditorState.createWithContent(block));
-        setName(obj.title);
+        setName(obj.type);
       }
     }
     showModal(true);
@@ -81,11 +109,14 @@ const AddModule = () => {
     },
     index: any,
   ) => {
-    console.log('content', content);
-    const deleteIndex = content.findIndex((item: any) => item.dp === data.dp);
-    if (deleteIndex !== -1) {
-      content.splice(deleteIndex, 1);
-    }
+    console.log('addModuleData', addModuleData);
+    const deleteIndex = addModuleData.findIndex(
+      (item: any) => item.dp === data.dp,
+    );
+    console.log('deleteIndex', deleteIndex);
+    // if (deleteIndex !== -1) {
+    //   addModuleData.splice(deleteIndex, 1);
+    // }
     setVal(val - 1);
     addModuleData.splice(index, 1);
   };
@@ -98,18 +129,18 @@ const AddModule = () => {
   };
 
   const onOkModal = () => {
-    const obj = content.find((o) => o.dp === dp);
+    const obj = addModuleData.find((o) => o.dp === dp);
     if (obj) {
-      content.map((item) => {
+      addModuleData.map((item) => {
         if (item.dp === dp) {
           if (type === 'Api Reference') {
             // eslint-disable-next-line no-param-reassign
-            item.title = 'Api Reference';
+            item.type = 'Api Reference';
             // eslint-disable-next-line no-param-reassign
             item.desc = draftToHtml(convertToRaw(edState.getCurrentContent()));
           } else {
             // eslint-disable-next-line no-param-reassign
-            item.title = type;
+            item.type = type;
             // eslint-disable-next-line no-param-reassign
             item.desc = name;
           }
@@ -121,35 +152,59 @@ const AddModule = () => {
       console.log('else');
       if (type === 'Api Reference') {
         const updatedData = [
-          ...content,
+          ...addModuleData,
           {
             id,
             dp,
-            title: 'Api Reference',
+            type: 'Api Reference',
             desc: draftToHtml(convertToRaw(edState.getCurrentContent())),
           },
         ];
-        setContent(updatedData);
+        setaddModuleData(updatedData);
       } else {
         const updatedData = [
-          ...content,
+          ...addModuleData,
           {
             id,
             dp,
-            title: type,
+            type,
             desc: name,
           },
         ];
-        setContent(updatedData);
+        setaddModuleData(updatedData);
       }
     }
 
-    localStorage.setItem('my_json', JSON.stringify(content));
+    localStorage.setItem('my_json', JSON.stringify(addModuleData));
     showModal(false);
     setEditorState(EditorState.createEmpty());
     setName('');
     setID(0);
     console.log('jsondata', localStorage.getItem('my_json'));
+  };
+
+  const dragStart = (e: React.DragEvent<HTMLButtonElement>, position: any) => {
+    dragItem.current = position;
+    console.log(position, e);
+  };
+
+  const dragEnter = (
+    e: React.DragEvent<HTMLButtonElement>,
+    position: number,
+  ) => {
+    dragOverItem.current = position;
+    console.log(e.target, position);
+  };
+
+  const drop = () => {
+    const copyListItems = [...addModuleData];
+    const dragItemContent = copyListItems[dragItem.current];
+    copyListItems.splice(dragItem.current, 1);
+    copyListItems.splice(dragOverItem.current, 0, dragItemContent);
+    dragItem.current = null;
+    dragOverItem.current = null;
+    console.log('copyListItems', copyListItems);
+    setaddModuleData(copyListItems);
   };
 
   return (
@@ -183,6 +238,10 @@ const AddModule = () => {
                       index: any,
                     ) => (
                       <button
+                        onDragStart={(e) => dragStart(e, index)}
+                        onDragEnter={(e) => dragEnter(e, index)}
+                        onDragEnd={drop}
+                        draggable
                         type="button"
                         aria-label="add section"
                         onClick={() => setEnableButton(index)}
@@ -242,14 +301,16 @@ const AddModule = () => {
                           setEnableButton(-1);
                           setVal(val + 1);
                           const obj = {
-                            id: Number,
-                            type: String,
-                            dp: Number,
+                            id,
+                            type,
+                            dp,
+                            desc: '',
                           };
                           const len = addModuleData.length;
                           obj.id = selectModuleData[index].id;
                           obj.type = selectModuleData[index].type;
-                          obj.dp = addModuleData[len - 1].dp + 1;
+                          // prettier-ignore
+                          obj.dp = len === 0 ? 1 : addModuleData[len - 1].dp + 1;
 
                           addModuleData.push(obj);
                           console.log('addModuleData', addModuleData);
@@ -266,17 +327,19 @@ const AddModule = () => {
 
           <div className="px-3 flex-1">
             <div className="h-full preview-width md:w-auto border border-gray-500 rounded-md p-6 preview bg-white full-screen overflow-x-scroll md:overflow-x-auto overflow-y-scroll">
-              {content.map((data) => (
+              {addModuleData.map((data) => (
                 <div>
-                  {data.id === 1 && <h1>{data.desc}</h1>}
-                  {data.id === 2 && <p>{data.desc}</p>}
-                  {data.id === 3 && (
+                  {data.id === 1 && data.desc.length > 0 && (
+                    <h1>{data.desc}</h1>
+                  )}
+                  {data.id === 2 && data.desc.length > 0 && <p>{data.desc}</p>}
+                  {data.id === 3 && data.desc.length > 0 && (
                     <div>
                       <h1>Usage</h1>
                       <Gist id={gistData} />
                     </div>
                   )}
-                  {data.id === 4 && (
+                  {data.id === 4 && data.desc.length > 0 && (
                     <div>
                       <h1>Api Reference</h1>
                       <div dangerouslySetInnerHTML={{ __html: data.desc }} />
@@ -318,13 +381,11 @@ const AddModule = () => {
                   'list',
                   'textAlign',
                   'link',
-                  'embedded',
                 ],
                 inline: { inDropdown: true },
                 list: { inDropdown: true },
                 textAlign: { inDropdown: true },
                 link: { inDropdown: true },
-                // history: { inDropdown: true },
               }}
             />
           </div>
