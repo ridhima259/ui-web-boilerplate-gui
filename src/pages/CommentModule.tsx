@@ -8,6 +8,8 @@ const Commentmodule = () => (
     <Header
       title="COMMENT MODULE"
       subtitle="Easiest way to setup your Comment Module"
+      showTitle={false}
+      onTitleChanged={() => {}}
     />
     <a
       href="/"

@@ -253,6 +253,8 @@ const BoilerPlate = () => {
       <Header
         title="FRONTEND REACT BOILERPLATE"
         subtitle="A Quick Setup to build your own application "
+        showTitle={false}
+        onTitleChanged={() => {}}
       >
         <img src={logo} alt="text" />
       </Header>
@@ -267,11 +269,11 @@ const BoilerPlate = () => {
               }}
             >
               <Step
-                description={(
+                description={
                   <div className="h-16 mt-6">
                     {frameworkContent[framework].name}
                   </div>
-                )}
+                }
                 title="Framework"
               />
               <Step

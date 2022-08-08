@@ -6,7 +6,12 @@ import Header from '../components/header';
 
 const utility = () => (
   <div>
-    <Header title="UTILITY" subtitle="Easiest way to setup your UTILITY" />
+    <Header
+      title="UTILITY"
+      subtitle="Easiest way to setup your UTILITY"
+      showTitle={false}
+      onTitleChanged={() => {}}
+    />
     <a
       href="/"
       title="back"

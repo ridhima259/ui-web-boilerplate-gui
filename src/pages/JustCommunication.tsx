@@ -8,6 +8,8 @@ const JustCommunication = () => (
     <Header
       title="COMMUNICATION FRAMEWORK"
       subtitle="Easiest way to setup your   Communication Framework"
+      showTitle={false}
+      onTitleChanged={() => {}}
     />
     <a
       href="/"

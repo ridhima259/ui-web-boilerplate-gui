@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import Gist from 'react-gist';
-import { Modal, Input } from 'antd';
+import { Modal, Input, Button } from 'antd';
 import 'antd/dist/antd.css';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, setDoc, doc } from 'firebase/firestore';
 import { Editor } from 'react-draft-wysiwyg';
 import draftToHtml from 'draftjs-to-html';
 import {
@@ -14,7 +16,7 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import Header from '../components/header';
 import Reset from '../assets/svg/reset.svg';
 import Trash from '../assets/svg/trash.svg';
-import { selectModuleData } from '../assets/data/content';
+import { firebaseConfig, selectModuleData } from '../assets/data/content';
 
 // type dragRef = {
 //   dragItem: number;
@@ -22,19 +24,16 @@ import { selectModuleData } from '../assets/data/content';
 // };
 
 const AddModule = () => {
+  const app = initializeApp(firebaseConfig);
+  const firestore = getFirestore(app);
+
   const [addModal, showModal] = useState(false);
   const [enableButton, setEnableButton] = useState(0);
   // prettier-ignore
   const [edState, setEditorState] = React.useState(() => EditorState.createEmpty());
-  // const [content, setContent] = React.useState([
-  //   {
-  //     id: -1,
-  //     dp: 0,
-  //     title: '',
-  //     desc: '',
-  //   },
-  // ]);
   const [name, setName] = useState('');
+  const [mainHeading, setMainHeading] = useState('');
+  const [isMainHeadingAvail, setIsMainHeadingAvail] = useState(false);
   const [val, setVal] = useState(0);
   const [id, setID] = useState(0);
   const [dp, setDp] = useState(-1);
@@ -175,7 +174,12 @@ const AddModule = () => {
       }
     }
 
-    localStorage.setItem('my_json', JSON.stringify(addModuleData));
+    const jsondata = {
+      mainTitle: mainHeading,
+      dataset: addModuleData,
+    };
+
+    localStorage.setItem('my_json', JSON.stringify(jsondata));
     showModal(false);
     setEditorState(EditorState.createEmpty());
     setName('');
@@ -204,6 +208,13 @@ const AddModule = () => {
     dragItem.current = null;
     dragOverItem.current = null;
     console.log('copyListItems', copyListItems);
+
+    copyListItems.map((c, index) => {
+      const slide = c;
+      slide.dp = index + 1;
+      return slide;
+    });
+
     setaddModuleData(copyListItems);
   };
 
@@ -212,6 +223,10 @@ const AddModule = () => {
       <Header
         title="ADD MODULE"
         subtitle="Easiest way to setup your Pure Component"
+        showTitle
+        onTitleChanged={(title: string) => {
+          setMainHeading(title);
+        }}
       />
       <div className="mx-5 pb-5 pt-20">
         <div className="flex md:px-6 md:pt-6">
@@ -326,6 +341,49 @@ const AddModule = () => {
           </div>
 
           <div className="px-3 flex-1">
+            <div className="py-3 flex-row">
+              <nav className=" -mb-px flex space-x-8">
+                <Button
+                  type="primary"
+                  onClick={async () => {
+                    if (mainHeading.length != null) {
+                      setIsMainHeadingAvail(true);
+                      const specialoftheDay = doc(
+                        firestore,
+                        `dailySpecial/${mainHeading}`,
+                      );
+                      const jsondata = {
+                        mainTitle: mainHeading,
+                        dataset: addModuleData,
+                      };
+                      try {
+                        await setDoc(specialoftheDay, jsondata);
+                      } catch (error) {
+                        console.log('error occured!');
+                      }
+
+                      // const querySnapshot = await getDocs(
+                      //   collection(firestore, 'dailySpecial'),
+                      // );
+                      // querySnapshot.forEach((doc) => {
+                      //   // doc.data() is never undefined for query doc snapshots
+                      //   console.log(' => ', doc.data());
+                      // });
+                    } else {
+                      setIsMainHeadingAvail(false);
+                    }
+                    console.log('deploy clicked');
+                  }}
+                >
+                  Deploy
+                </Button>
+              </nav>
+              {isMainHeadingAvail && (
+                <small className="w-100 required-field">
+                  Please enter main heading
+                </small>
+              )}
+            </div>
             <div className="h-full preview-width md:w-auto border border-gray-500 rounded-md p-6 preview bg-white full-screen overflow-x-scroll md:overflow-x-auto overflow-y-scroll">
               {addModuleData.map((data) => (
                 <div>

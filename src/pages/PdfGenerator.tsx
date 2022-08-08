@@ -8,6 +8,8 @@ const PdfGenerator = () => (
     <Header
       title="PDF GENERATOR"
       subtitle="Easiest way to setup your PDF Generator"
+      showTitle={false}
+      onTitleChanged={() => {}}
     />
     <a
       href="/"

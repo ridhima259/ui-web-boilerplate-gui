@@ -26,6 +26,11 @@
   --hoverBorder: #ababab;
 }
 
+.required-field {
+  content: '*';
+  color: red;
+}
+
 .preview h1 {
   box-sizing: border-box;
   color: var(--black);

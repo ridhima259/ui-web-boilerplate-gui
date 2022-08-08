@@ -232,3 +232,13 @@ export const apiData: attributes[] = [
     desc: 'Build one JavaScript/TypeScript project that runs natively on all your users devices.',
   },
 ];
+
+export const firebaseConfig = {
+  apiKey: 'AIzaSyAlFkuvZwhBzMElncXMNw_FGNWexQ7utWw',
+  authDomain: 'web-boilerplate-dd8d0.firebaseapp.com',
+  projectId: 'web-boilerplate-dd8d0',
+  storageBucket: 'web-boilerplate-dd8d0.appspot.com',
+  messagingSenderId: '716898451831',
+  appId: '1:716898451831:web:aaca30d204d86f2100e172',
+  measurementId: 'G-HE39LRJ43E',
+};

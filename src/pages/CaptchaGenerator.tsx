@@ -9,6 +9,8 @@ const CaptchaGenerator = () => (
     <Header
       title="CAPTCHA GENERATOR"
       subtitle="Easiest way to setup your Captcha Generator"
+      showTitle={false}
+      onTitleChanged={() => {}}
     />
     <a
       href="/"
