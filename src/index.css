@@ -335,6 +335,29 @@
   border-color: var(--black);
 }
 
+.css-rqrjmr {
+  color: var(--black);
+  font-size: 48px;
+  line-height: 120%;
+  letter-spacing: -0.022em;
+  font-weight: 500;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--hoverBorder);
+}
+
+.css-ngwsh7 {
+  font-family: var(--fontFamily);
+  color: var(--black);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 160%;
+  letter-spacing: -0.011em;
+  display: block;
+  margin-bottom: 1rem;
+}
+
 @media (max-width: 420px) {
   .css-1w1veeg {
     height: 48px;

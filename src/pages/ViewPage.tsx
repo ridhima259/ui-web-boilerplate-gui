@@ -1,21 +1,86 @@
-import React, { useState } from 'react';
-import { apiData } from '../assets/data/content';
+import React, { useState, useEffect } from 'react';
+import Gist from 'react-gist';
+import { initializeApp } from 'firebase/app';
+import { getFirestore, getDocs, collection } from 'firebase/firestore';
+import { firebaseConfig } from '../assets/data/content';
 import Header from '../components/headerHome';
+import Heading from '../components/heading';
+
+function renderComponentList(data: any) {
+  switch (data?.type) {
+    case 'Heading':
+      return <Heading value={data?.desc} />;
+    case 'Description':
+      return <div className="css-ngwsh7">{data?.desc}</div>;
+    case 'Api Reference':
+      return (
+        <div>
+          <h1 className="css-rqrjmr">Api Reference</h1>
+          <div dangerouslySetInnerHTML={{ __html: data?.desc }} />
+        </div>
+      );
+    case 'Usage':
+      return (
+        <div>
+          <h1 className="css-rqrjmr">Usage</h1>
+          <Gist id={data?.desc} />
+        </div>
+      );
+    default:
+      return <p>default</p>;
+  }
+}
 
 const ViewPage = () => {
   const [count, setCount] = useState(0);
+  const [displayData, setDisplayData] = useState<any | null>(null);
+  const [hasLoaded, setHasLoaded] = useState(false);
+  // eslint-disable-next-line no-unused-vars
+  const [firestoreData, setFirestoreData] = React.useState([
+    {
+      mainTitle: String,
+      dataset: [
+        {
+          id: Number,
+          dp: Number,
+          type: String,
+          desc: String,
+        },
+      ],
+    },
+  ]);
 
-  // function HandleItemClick(
-  //   e: React.MouseEvent<HTMLDivElement, MouseEvent>,
-  // ): void {
-  //   // const history = useHistory();
-  //   console.log((e.target as any).innerText);
-  //   console.log(history);
-  //   return history.push({
-  //     pathname: '/',
-  //     search: '?=react-native',
-  //   });
-  // }
+  const callFirestore = async () => {
+    const app = initializeApp(firebaseConfig);
+    const firestore = getFirestore(app);
+    const mySnapshot = await getDocs(collection(firestore, 'dailySpecial'));
+    mySnapshot.forEach((doc) => {
+      // doc.data() is never undefined for query doc snapshots
+      // apiData.push(doc.data());
+      const obj = {
+        mainTitle: String,
+        dataset: [
+          {
+            id: Number,
+            dp: Number,
+            type: String,
+            desc: String,
+          },
+        ],
+      };
+      obj.mainTitle = doc.data().mainTitle;
+      obj.dataset = doc.data().dataset;
+      firestoreData.push(obj);
+      // setFirestoreData(obj);
+    });
+    console.log(' => ', hasLoaded);
+    setHasLoaded(true);
+  };
+
+  useEffect(() => {
+    callFirestore();
+  }, []);
+
   return (
     <div>
       <Header />
@@ -58,11 +123,14 @@ const ViewPage = () => {
                   <div className="css-i3pbo">
                     <div className="css-l4enf1"> API Reference</div>
                   </div>
-                  {apiData.map((data, index) => (
+                  {firestoreData.map((data, index) => (
                     <div
                       className="css-3i8gv9"
                       tabIndex={index}
-                      onClick={() => setCount(index)}
+                      onClick={() => {
+                        setCount(index);
+                        setDisplayData(firestoreData[index].dataset);
+                      }}
                       role="button"
                       aria-hidden="true"
                     >
@@ -71,7 +139,7 @@ const ViewPage = () => {
                           count === index ? 'css-1q7irygactive' : ''
                         }`}
                       >
-                        {data.name}
+                        {data.mainTitle}
                       </li>
                     </div>
                   ))}
@@ -85,13 +153,13 @@ const ViewPage = () => {
           <div className="css-jn5ppe">
             <div className="css-194k3rb">
               <div className="css-g1n4fp">
-                <h1
-                  // style={"margin-bottom:8px;font-family:Inter-Black, system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,'Noto Sans',sans-serif,'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol','Noto Color Emoji';font-weight:900"}
-                  className="css-14rkxji"
-                >
-                  {apiData[count].title}
-                </h1>
-                <p className="css-152yx2">{apiData[count].desc}</p>
+                {
+                  // prettier-ignore
+                  displayData != null
+                  && displayData.map((data:any) => (
+                       renderComponentList(data)
+                  ))
+                }
               </div>
             </div>
           </div>

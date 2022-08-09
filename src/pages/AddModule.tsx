@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import Gist from 'react-gist';
 import { Modal, Input, Button } from 'antd';
 import 'antd/dist/antd.css';
@@ -24,6 +25,7 @@ import { firebaseConfig, selectModuleData } from '../assets/data/content';
 // };
 
 const AddModule = () => {
+  const history = useHistory();
   const app = initializeApp(firebaseConfig);
   const firestore = getFirestore(app);
 
@@ -346,8 +348,12 @@ const AddModule = () => {
                 <Button
                   type="primary"
                   onClick={async () => {
-                    if (mainHeading.length != null) {
-                      setIsMainHeadingAvail(true);
+                    // prettier-ignore
+                    if (
+                      mainHeading.length > 0
+                      && addModuleData[0]?.desc.length > 0
+                    ) {
+                      // setIsMainHeadingAvail(true);
                       const specialoftheDay = doc(
                         firestore,
                         `dailySpecial/${mainHeading}`,
@@ -358,19 +364,12 @@ const AddModule = () => {
                       };
                       try {
                         await setDoc(specialoftheDay, jsondata);
+                        history.push('/viewpage');
                       } catch (error) {
                         console.log('error occured!');
                       }
-
-                      // const querySnapshot = await getDocs(
-                      //   collection(firestore, 'dailySpecial'),
-                      // );
-                      // querySnapshot.forEach((doc) => {
-                      //   // doc.data() is never undefined for query doc snapshots
-                      //   console.log(' => ', doc.data());
-                      // });
                     } else {
-                      setIsMainHeadingAvail(false);
+                      setIsMainHeadingAvail(true);
                     }
                     console.log('deploy clicked');
                   }}
@@ -380,7 +379,7 @@ const AddModule = () => {
               </nav>
               {isMainHeadingAvail && (
                 <small className="w-100 required-field">
-                  Please enter main heading
+                  Please enter main heading and alteast fill one section
                 </small>
               )}
             </div>
