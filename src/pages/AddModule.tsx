@@ -15,14 +15,9 @@ import {
 } from 'draft-js';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import Header from '../components/header';
-import Reset from '../assets/svg/reset.svg';
+import Edit from '../assets/svg/edit.svg';
 import Trash from '../assets/svg/trash.svg';
 import { firebaseConfig, selectModuleData } from '../assets/data/content';
-
-// type dragRef = {
-//   dragItem: number;
-//   dragOverItem: number;
-// };
 
 const AddModule = () => {
   const history = useHistory();
@@ -59,11 +54,6 @@ const AddModule = () => {
   const dragItem = React.useRef<any>(null);
 
   const dragOverItem = React.useRef<any>(null);
-
-  // const drag = React.useRef<dragRef>({
-  //   dragItem: 0,
-  //   dragOverItem: 0,
-  // });
 
   const onEditorStateChange = (
     editorState: React.SetStateAction<EditorState>,
@@ -110,14 +100,10 @@ const AddModule = () => {
     },
     index: any,
   ) => {
-    console.log('addModuleData', addModuleData);
     const deleteIndex = addModuleData.findIndex(
       (item: any) => item.dp === data.dp,
     );
     console.log('deleteIndex', deleteIndex);
-    // if (deleteIndex !== -1) {
-    //   addModuleData.splice(deleteIndex, 1);
-    // }
     setVal(val - 1);
     addModuleData.splice(index, 1);
   };
@@ -276,7 +262,7 @@ const AddModule = () => {
                           >
                             <img
                               className="w-auto h-5"
-                              src={Reset}
+                              src={Edit}
                               alt="reset-icon"
                             />
                           </button>
@@ -402,8 +388,6 @@ const AddModule = () => {
                       <div dangerouslySetInnerHTML={{ __html: data.desc }} />
                     </div>
                   )}
-
-                  {/* <div dangerouslySetInnerHTML={{ __html: data.desc }} /> */}
                 </div>
               ))}
             </div>
@@ -533,9 +517,10 @@ const AddModule = () => {
                   setName(e.target.value);
                 }}
               />
-              <small className="w-100">
-                Help Text : https://gist.github.com/yourname/id
+              <small className="w-100 text-warning">
+                Help Text : https://gist.github.com/yourname/
               </small>
+              <small className="w-100 required-field">id</small>
             </div>
           </div>
         </Modal>

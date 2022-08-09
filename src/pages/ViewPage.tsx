@@ -31,23 +31,23 @@ function convertToSlug(Text: any) {
 }
 
 const ViewPage = () => {
+  type CategoriesType = {
+    mainTitle: string;
+    dataset: CoursesType[];
+  };
+
+  type CoursesType = {
+    id: number;
+    dp: number;
+    type: string;
+    desc: string;
+  };
+
   const [count, setCount] = useState(0);
   const [displayData, setDisplayData] = useState<any | null>(null);
   const [hasLoaded, setHasLoaded] = useState(false);
   // eslint-disable-next-line no-unused-vars
-  const [firestoreData, setFirestoreData] = React.useState([
-    {
-      mainTitle: String,
-      dataset: [
-        {
-          id: Number,
-          dp: Number,
-          type: String,
-          desc: String,
-        },
-      ],
-    },
-  ]);
+  const [firestoreData, setFirestoreData] = useState<CategoriesType[]>([]);
 
   const callFirestore = async () => {
     const app = initializeApp(firebaseConfig);
@@ -55,22 +55,22 @@ const ViewPage = () => {
     const mySnapshot = await getDocs(collection(firestore, 'dailySpecial'));
     mySnapshot.forEach((doc) => {
       const obj = {
-        mainTitle: String,
+        mainTitle: '',
         dataset: [
           {
-            id: Number,
-            dp: Number,
-            type: String,
-            desc: String,
+            id: 0,
+            dp: 0,
+            type: '',
+            desc: '',
           },
         ],
       };
       obj.mainTitle = doc.data().mainTitle;
       obj.dataset = doc.data().dataset;
       firestoreData.push(obj);
-      // setFirestoreData(obj);
     });
     console.log(' => ', hasLoaded);
+    setDisplayData(firestoreData[0].dataset);
     setHasLoaded(true);
   };
 
