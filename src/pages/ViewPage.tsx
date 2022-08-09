@@ -1,34 +1,33 @@
 import React, { useState, useEffect } from 'react';
-import Gist from 'react-gist';
 import { initializeApp } from 'firebase/app';
+import { NavLink } from 'react-router-dom';
 import { getFirestore, getDocs, collection } from 'firebase/firestore';
 import { firebaseConfig } from '../assets/data/content';
 import Header from '../components/headerHome';
-import Heading from '../components/heading';
+import Heading from '../components/viewPageComponent/heading';
+import Description from '../components/viewPageComponent/description';
+import ApiReference from '../components/viewPageComponent/apireference';
+import Usage from '../components/viewPageComponent/usage';
 
 function renderComponentList(data: any) {
   switch (data?.type) {
     case 'Heading':
       return <Heading value={data?.desc} />;
     case 'Description':
-      return <div className="css-ngwsh7">{data?.desc}</div>;
+      return <Description value={data?.desc} />;
     case 'Api Reference':
-      return (
-        <div>
-          <h1 className="css-rqrjmr">Api Reference</h1>
-          <div dangerouslySetInnerHTML={{ __html: data?.desc }} />
-        </div>
-      );
+      return <ApiReference value={data?.desc} />;
     case 'Usage':
-      return (
-        <div>
-          <h1 className="css-rqrjmr">Usage</h1>
-          <Gist id={data?.desc} />
-        </div>
-      );
+      return <Usage value={data?.desc} />;
     default:
       return <p>default</p>;
   }
+}
+
+function convertToSlug(Text: any) {
+  return Text.toLowerCase()
+    .replace(/ /g, '-')
+    .replace(/[^\w-]+/g, '');
 }
 
 const ViewPage = () => {
@@ -55,8 +54,6 @@ const ViewPage = () => {
     const firestore = getFirestore(app);
     const mySnapshot = await getDocs(collection(firestore, 'dailySpecial'));
     mySnapshot.forEach((doc) => {
-      // doc.data() is never undefined for query doc snapshots
-      // apiData.push(doc.data());
       const obj = {
         mainTitle: String,
         dataset: [
@@ -84,7 +81,7 @@ const ViewPage = () => {
   return (
     <div>
       <Header />
-      <div className="css-f3dkuz">
+      <div className="main xl:pt-20 w-full h-full 2xl:h-full d-flex flex-row">
         <div className="container-main">
           <div className="css-jn5ppe">
             <nav className="css-1u2eykn">
@@ -105,18 +102,6 @@ const ViewPage = () => {
                       <p className="css-1q7iryg">Installation</p>
                     </button>
                   </div>
-
-                  <div className="css-3i8gv9">
-                    <a href="/homepage" className="css-1q7iryg">
-                      Create a new app
-                    </a>
-                  </div>
-
-                  <div className="css-3i8gv9">
-                    <a href="/homepage" className="css-1q7iryg">
-                      errors and debugging
-                    </a>
-                  </div>
                 </div>
 
                 <div className="css-n085mf">
@@ -124,24 +109,32 @@ const ViewPage = () => {
                     <div className="css-l4enf1"> API Reference</div>
                   </div>
                   {firestoreData.map((data, index) => (
-                    <div
-                      className="css-3i8gv9"
-                      tabIndex={index}
-                      onClick={() => {
-                        setCount(index);
-                        setDisplayData(firestoreData[index].dataset);
+                    <NavLink
+                      to={{
+                        pathname: `/viewpage/${convertToSlug(
+                          data.mainTitle.toString(),
+                        )}`,
                       }}
-                      role="button"
-                      aria-hidden="true"
                     >
-                      <li
-                        className={`css-1q7iryg ${
-                          count === index ? 'css-1q7irygactive' : ''
-                        }`}
+                      <div
+                        className="css-3i8gv9"
+                        tabIndex={index}
+                        onClick={() => {
+                          setCount(index);
+                          setDisplayData(firestoreData[index].dataset);
+                        }}
+                        role="button"
+                        aria-hidden="true"
                       >
-                        {data.mainTitle}
-                      </li>
-                    </div>
+                        <li
+                          className={`css-1q7iryg ${
+                            count === index ? 'css-1q7irygactive' : ''
+                          }`}
+                        >
+                          {data.mainTitle}
+                        </li>
+                      </div>
+                    </NavLink>
                   ))}
                 </div>
               </div>

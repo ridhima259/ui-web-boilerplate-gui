@@ -168,6 +168,11 @@ export const stackNavList: stackNavType[] = [
     component: ViewPage,
   },
   {
+    id: '2',
+    routes: '/viewpage/:page',
+    component: ViewPage,
+  },
+  {
     id: '3',
     routes: '/homepage',
     component: Home,
