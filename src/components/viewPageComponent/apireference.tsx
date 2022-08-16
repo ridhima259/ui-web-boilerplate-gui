@@ -6,7 +6,7 @@ type Head = {
 
 const ApiReference: React.FC<Head> = ({ value }) => (
   <div>
-    <h1 className="css-rqrjmr">Api Reference</h1>
+    <h1 className="css-rqrjmrr">Api Reference</h1>
     <div dangerouslySetInnerHTML={{ __html: value }} />
   </div>
 );

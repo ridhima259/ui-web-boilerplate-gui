@@ -1,4 +1,5 @@
 import AddModule from '@/src/pages/AddModule';
+import Authentication from '@/src/pages/Authentication';
 import GettingStarted from '@/src/pages/GettingStarted';
 import Home from '@/src/pages/HomePage';
 import ViewPage from '@/src/pages/ViewPage';
@@ -176,6 +177,11 @@ export const stackNavList: stackNavType[] = [
     id: '3',
     routes: '/add-module',
     component: AddModule,
+  },
+  {
+    id: '4',
+    routes: '/fibologin',
+    component: Authentication,
   },
 ];
 

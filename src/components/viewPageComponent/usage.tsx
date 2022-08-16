@@ -7,7 +7,7 @@ type Head = {
 
 const Usage: React.FC<Head> = ({ value }) => (
   <div>
-    <h1 className="css-rqrjmr">Usage</h1>
+    <h1 className="css-rqrjmrr">Usage</h1>
     <Gist id={value} />
   </div>
 );
