@@ -1,8 +1,10 @@
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 import { firebaseConfig } from '../assets/data/content';
+import { NotesState } from '../services/reducer';
 
 const Authentication = () => {
   const app = initializeApp(firebaseConfig);
@@ -10,6 +12,7 @@ const Authentication = () => {
   const history = useHistory();
   const [email, setEmail] = useState('');
   const [pass, setPassword] = useState('');
+  const notes = useSelector<NotesState>((state) => state.notes);
 
   const logInWithEmailAndPassword = async (mail: string, password: string) => {
     try {
