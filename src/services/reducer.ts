@@ -1,22 +1,28 @@
-export interface NotesState {
-  notes: string[];
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+
+interface GameState {
+  loading: boolean;
+  errors: any;
+  token: string;
+  value: number;
 }
 
-const initialState = {
-  notes: ['heyy'],
+const initialState: GameState = {
+  loading: true,
+  errors: null,
+  token: '',
+  value: 0,
 };
 
-type Action = { type: 'ADD_NOTE'; payload: string };
+export const gameSlice = createSlice({
+  name: 'token',
+  initialState,
+  reducers: {
+    setToken: (state, action: PayloadAction<string>) => {
+      state.token = action.payload;
+    },
+  },
+});
 
-export const notesReducer = (
-  state: NotesState = initialState,
-  action: Action,
-) => {
-  switch (action.type) {
-    case 'ADD_NOTE': {
-      return { ...state, notes: [...state.notes, action.payload] };
-    }
-    default:
-      return state;
-  }
-};
+export default gameSlice.reducer;
+export const { setToken } = gameSlice.actions;

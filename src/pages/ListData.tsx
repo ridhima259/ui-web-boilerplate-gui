@@ -1,5 +1,6 @@
 import { Button, Modal } from 'antd';
 import { initializeApp } from 'firebase/app';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import {
   getDocs,
   getFirestore,
@@ -11,6 +12,8 @@ import React, { useEffect, useState } from 'react';
 import DataTable from 'react-data-table-component';
 import { useHistory } from 'react-router-dom';
 import { firebaseConfig } from '../assets/data/content';
+import { setToken } from '../services/reducer';
+import { useAppDispatch } from '../services/rootreducer';
 
 const ListData = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -19,8 +22,10 @@ const ListData = () => {
   const [hasLoaded, setHasLoaded] = useState(false);
   const [deleteIndex, setDeleteIndex] = useState(0);
   const [editIndex, setEditIndex] = useState(0);
+  const [uidValue, setUID] = useState('');
   // eslint-disable-next-line no-unused-vars
   const [firestoreData, setFirestoreData] = useState<CategoriesType[]>([]);
+  const dispatch = useAppDispatch();
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -101,8 +106,22 @@ const ListData = () => {
     desc: string;
   };
 
+  useEffect(() => {
+    dispatch(setToken(uidValue));
+  }, [uidValue]);
+
   const callFirestore = async () => {
     const app = initializeApp(firebaseConfig);
+    const auth = getAuth(app);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid } = user;
+        setUID(uid);
+      } else {
+        history.push('/fibologin');
+        // User is signed out
+      }
+    });
     const firestore = getFirestore(app);
     const mySnapshot = await getDocs(collection(firestore, 'dailySpecial'));
     mySnapshot.forEach((document) => {
