@@ -10,6 +10,7 @@ const utility = () => (
       title="UTILITY"
       subtitle="Easiest way to setup your UTILITY"
       showTitle={false}
+      value=""
       onTitleChanged={() => {}}
     />
     <a

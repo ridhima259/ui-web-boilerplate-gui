@@ -7,6 +7,7 @@ type Head = {
   subtitle: string;
   showTitle: boolean;
   onTitleChanged: Function;
+  value: string;
 };
 
 const Header: React.FC<Head> = ({
@@ -14,6 +15,7 @@ const Header: React.FC<Head> = ({
   subtitle,
   showTitle,
   onTitleChanged,
+  value,
 }) => (
   <div className="header h-18 text-black bg-headerbg shadow-4xl w-full fixed z-50 ">
     <div className="flex  px-5 gap-4 d-flex">
@@ -32,6 +34,7 @@ const Header: React.FC<Head> = ({
             <Input
               style={{ height: 30 }}
               placeholder="heading"
+              value={value}
               onChange={(e) => {
                 onTitleChanged(e.target.value);
               }}

@@ -9,6 +9,7 @@ const Commentmodule = () => (
       title="COMMENT MODULE"
       subtitle="Easiest way to setup your Comment Module"
       showTitle={false}
+      value=""
       onTitleChanged={() => {}}
     />
     <a

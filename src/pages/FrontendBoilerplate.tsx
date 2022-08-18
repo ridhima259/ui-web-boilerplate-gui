@@ -254,6 +254,7 @@ const BoilerPlate = () => {
         title="FRONTEND REACT BOILERPLATE"
         subtitle="A Quick Setup to build your own application "
         showTitle={false}
+        value=""
         onTitleChanged={() => {}}
       >
         <img src={logo} alt="text" />

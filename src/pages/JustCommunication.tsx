@@ -9,6 +9,7 @@ const JustCommunication = () => (
       title="COMMUNICATION FRAMEWORK"
       subtitle="Easiest way to setup your   Communication Framework"
       showTitle={false}
+      value=""
       onTitleChanged={() => {}}
     />
     <a

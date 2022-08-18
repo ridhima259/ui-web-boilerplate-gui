@@ -1,3 +1,4 @@
+import { Button, Input } from 'antd';
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
@@ -35,21 +36,16 @@ const Authentication = () => {
           <h3 className="Auth-form-title">Sign In</h3>
           <div className="form-group mt-3">
             <h5>Email address</h5>
-            <input
-              type="email"
-              className="form-control mt-1"
+            <Input
               placeholder="Enter email"
               onChange={(e) => {
                 setEmail(e.target.value);
-                console.log('email', email);
               }}
             />
           </div>
           <div className="form-group mt-3">
             <h5>Password</h5>
-            <input
-              type="password"
-              className="form-control mt-1"
+            <Input
               placeholder="Enter password"
               onChange={(e) => {
                 setPassword(e.target.value);
@@ -58,16 +54,14 @@ const Authentication = () => {
             />
           </div>
           <div className="d-grid gap-2 mt-3">
-            <button
-              type="button"
-              className="btn btn-primary"
+            <Button
               onClick={() => {
                 console.log('clicked');
                 logInWithEmailAndPassword(email, pass);
               }}
             >
               Submit
-            </button>
+            </Button>
           </div>
         </div>
       </form>

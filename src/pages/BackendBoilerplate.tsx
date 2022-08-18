@@ -66,6 +66,7 @@ const BackendBoilerPlate = () => {
         title="BACKEND NODEJS BOILERPLATE"
         subtitle="Easiest way to setup your backend"
         showTitle={false}
+        value=""
         onTitleChanged={() => {}}
       >
         <img src={Nodejs} alt="Not found" />

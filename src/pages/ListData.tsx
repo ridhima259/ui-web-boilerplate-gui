@@ -53,9 +53,7 @@ const ListData = () => {
     {
       name: 'Action',
       cell: (item: any) => (
-        <button
-          type="button"
-          className="btn btn-primary"
+        <Button
           onClick={() => {
             const edIndex = firestoreData
               .map((e) => e.mainTitle)
@@ -64,21 +62,21 @@ const ListData = () => {
             console.log('editIndex', editIndex);
             history.push({
               pathname: '/add-module',
-              state: firestoreData[edIndex].dataset,
-              search: item.mainTitle,
+              state: {
+                detail: firestoreData[edIndex].dataset,
+                heading: item.mainTitle,
+              },
             });
           }}
         >
           Edit
-        </button>
+        </Button>
       ),
     },
     {
       name: 'Action',
       cell: (item: any) => (
-        <button
-          type="button"
-          className="btn btn-primary"
+        <Button
           onClick={() => {
             const delIndex = firestoreData
               .map((e) => e.mainTitle)
@@ -88,7 +86,7 @@ const ListData = () => {
           }}
         >
           Delete
-        </button>
+        </Button>
       ),
     },
   ];

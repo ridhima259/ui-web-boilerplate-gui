@@ -10,6 +10,7 @@ const CaptchaGenerator = () => (
       title="CAPTCHA GENERATOR"
       subtitle="Easiest way to setup your Captcha Generator"
       showTitle={false}
+      value=""
       onTitleChanged={() => {}}
     />
     <a

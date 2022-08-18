@@ -9,6 +9,7 @@ const PdfGenerator = () => (
       title="PDF GENERATOR"
       subtitle="Easiest way to setup your PDF Generator"
       showTitle={false}
+      value=""
       onTitleChanged={() => {}}
     />
     <a

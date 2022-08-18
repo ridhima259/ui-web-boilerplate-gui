@@ -20,17 +20,20 @@ import Trash from '../assets/svg/trash.svg';
 import { firebaseConfig, selectModuleData } from '../assets/data/content';
 
 const AddModule = () => {
-  type CoursesType = [
-    {
-      id: number;
-      dp: number;
-      type: string;
-      desc: string;
-    },
-  ];
+  type editType = {
+    detail: [
+      {
+        id: number;
+        dp: number;
+        type: string;
+        desc: string;
+      },
+    ];
+    heading: string;
+  };
 
   const history = useHistory();
-  const location = useLocation().state as CoursesType;
+  const location = useLocation().state as editType;
   const app = initializeApp(firebaseConfig);
   const firestore = getFirestore(app);
 
@@ -67,11 +70,12 @@ const AddModule = () => {
     // prettier-ignore
     if (location) {
       addModuleData.length = 0; // empties array
-      location.map((data) => {
+      location.detail.map((data) => {
         addModuleData.push(data);
         return false;
       });
       setHasLoaded(true);
+      setMainHeading(location.heading);
     }
   }, [location]);
 
@@ -236,6 +240,7 @@ const AddModule = () => {
         title="ADD MODULE"
         subtitle="Easiest way to setup your Pure Component"
         showTitle
+        value={mainHeading}
         onTitleChanged={(title: string) => {
           setMainHeading(title);
         }}
@@ -373,7 +378,10 @@ const AddModule = () => {
                         dataset: addModuleData,
                       };
                       try {
-                        await setDoc(specialoftheDay, jsondata);
+                        // await setDoc(specialoftheDay, jsondata);
+                        await setDoc(specialoftheDay, jsondata, {
+                          merge: true,
+                        });
                         history.push('/viewpage');
                       } catch (error) {
                         console.log('error occured!');
