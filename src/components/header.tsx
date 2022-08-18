@@ -18,7 +18,7 @@ const Header: React.FC<Head> = ({
   <div className="header h-18 text-black bg-headerbg shadow-4xl w-full fixed z-50 ">
     <div className="flex  px-5 gap-4 d-flex">
       {/* <img src={fibLogo} alt="No text" /> */}
-      <div className="p-4">
+      <div className="p-2">
         <h1 className="text-xl font-bold">{title}</h1>
         <h5 className="text-sm">{subtitle}</h5>
       </div>

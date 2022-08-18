@@ -2,6 +2,7 @@ import AddModule from '@/src/pages/AddModule';
 import Authentication from '@/src/pages/Authentication';
 import GettingStarted from '@/src/pages/GettingStarted';
 import Home from '@/src/pages/HomePage';
+import ListData from '@/src/pages/ListData';
 import ViewPage from '@/src/pages/ViewPage';
 
 interface keyable {
@@ -182,6 +183,11 @@ export const stackNavList: stackNavType[] = [
     id: '4',
     routes: '/fibologin',
     component: Authentication,
+  },
+  {
+    id: '5',
+    routes: '/list-data',
+    component: ListData,
   },
 ];
 

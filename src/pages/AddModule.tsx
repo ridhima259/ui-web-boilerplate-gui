@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useHistory, useLocation } from 'react-router-dom';
 import Gist from 'react-gist';
 import { Modal, Input, Button } from 'antd';
 import 'antd/dist/antd.css';
@@ -20,7 +20,17 @@ import Trash from '../assets/svg/trash.svg';
 import { firebaseConfig, selectModuleData } from '../assets/data/content';
 
 const AddModule = () => {
+  type CoursesType = [
+    {
+      id: number;
+      dp: number;
+      type: string;
+      desc: string;
+    },
+  ];
+
   const history = useHistory();
+  const location = useLocation().state as CoursesType;
   const app = initializeApp(firebaseConfig);
   const firestore = getFirestore(app);
 
@@ -36,6 +46,7 @@ const AddModule = () => {
   const [dp, setDp] = useState(-1);
   const [type, setType] = useState('');
   const [gistData, setGistData] = useState('');
+  const [hasLoaded, setHasLoaded] = useState(false);
   const [addModuleData, setaddModuleData] = React.useState([
     {
       type: 'Heading',
@@ -50,6 +61,19 @@ const AddModule = () => {
       desc: '',
     },
   ]);
+
+  useEffect(() => {
+    console.log('location', location, hasLoaded);
+    // prettier-ignore
+    if (location) {
+      addModuleData.length = 0; // empties array
+      location.map((data) => {
+        addModuleData.push(data);
+        return false;
+      });
+      setHasLoaded(true);
+    }
+  }, [location]);
 
   const dragItem = React.useRef<any>(null);
 

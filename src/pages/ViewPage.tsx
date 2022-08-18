@@ -67,7 +67,9 @@ const ViewPage = () => {
       };
       obj.mainTitle = doc.data().mainTitle;
       obj.dataset = doc.data().dataset;
-      firestoreData.push(obj);
+      if (!doc.data().isDeleted) {
+        firestoreData.push(obj);
+      }
     });
     console.log(' => ', hasLoaded);
     setDisplayData(firestoreData[0].dataset);

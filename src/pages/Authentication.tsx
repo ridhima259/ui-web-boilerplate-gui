@@ -13,11 +13,12 @@ const Authentication = () => {
   const [email, setEmail] = useState('');
   const [pass, setPassword] = useState('');
   const notes = useSelector<NotesState>((state) => state.notes);
+  console.log('notes', notes);
 
   const logInWithEmailAndPassword = async (mail: string, password: string) => {
     try {
       await signInWithEmailAndPassword(auth, mail, password);
-      history.push('/viewpage');
+      history.push('/list-data');
     } catch (err) {
       console.error(err);
       alert(err);
