@@ -1,6 +1,6 @@
 import { Button, Modal } from 'antd';
 import { initializeApp } from 'firebase/app';
-import { getAuth, onAuthStateChanged } from 'firebase/auth';
+import { getAuth, onAuthStateChanged, signOut } from 'firebase/auth';
 import {
   getDocs,
   getFirestore,
@@ -156,6 +156,22 @@ const ListData = () => {
       <Button type="primary" onClick={() => history.push('/add-module')}>
         Add Module
       </Button>
+      <Button
+        type="primary"
+        onClick={() => {
+          const auth = getAuth();
+          signOut(auth)
+            .then(() => {
+              dispatch(setToken(''));
+              // Sign-out successful.
+            })
+            .catch(() => {
+              // An error happened.
+            });
+        }}
+      >
+        Sign Out
+      </Button>
       <DataTable
         title="Pure Components List"
         highlightOnHover
@@ -164,11 +180,7 @@ const ListData = () => {
         data={firestoreData}
         customStyles={customStyles}
         fixedHeader
-        // actions={
-        //   <Button type="primary" onClick={() => history.push('/add-module')}>
-        //     Add Module
-        //   </Button>
-        // }
+        // actions={<button>Sign Out</button>}
       />
       <Modal
         title="Delete"

@@ -1,6 +1,10 @@
 import { Button, Input } from 'antd';
 import { initializeApp } from 'firebase/app';
-import { getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import {
+  getAuth,
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { firebaseConfig } from '../assets/data/content';
@@ -23,6 +27,13 @@ const Authentication = () => {
 
   useEffect(() => {
     console.log('useffect called');
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        history.push('/list-data');
+      } else {
+        // User is signed out
+      }
+    });
   }, []);
   return (
     <div className="Auth-form-container">

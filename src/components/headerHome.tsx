@@ -6,13 +6,13 @@ const headerHome = () => (
       <a href="/viewpage" className="mx-3 px-4 py-2 headerText">
         Docs
       </a>
-      <a
+      {/* <a
         href="/add-module"
         rel="noreferrer"
         className="mx-3 px-4 py-2 headerText"
       >
         Add Docs
-      </a>
+      </a> */}
       <a
         href="https://www.fibonalabs.com/aboutus"
         className="mx-3  px-4 py-2 headerText"

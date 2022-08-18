@@ -3,6 +3,7 @@ import { useHistory, useLocation } from 'react-router-dom';
 import Gist from 'react-gist';
 import { Modal, Input, Button } from 'antd';
 import 'antd/dist/antd.css';
+import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { initializeApp } from 'firebase/app';
 import { getFirestore, setDoc, doc } from 'firebase/firestore';
 import { Editor } from 'react-draft-wysiwyg';
@@ -50,6 +51,7 @@ const AddModule = () => {
   const [type, setType] = useState('');
   const [gistData, setGistData] = useState('');
   const [hasLoaded, setHasLoaded] = useState(false);
+  const [uidValue, setUID] = useState('');
   const [addModuleData, setaddModuleData] = React.useState([
     {
       type: 'Heading',
@@ -66,7 +68,17 @@ const AddModule = () => {
   ]);
 
   useEffect(() => {
-    console.log('location', location, hasLoaded);
+    console.log('location', location, hasLoaded, uidValue);
+    const auth = getAuth(app);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { uid } = user;
+        setUID(uid);
+      } else {
+        history.push('/fibologin');
+        // User is signed out
+      }
+    });
     // prettier-ignore
     if (location) {
       addModuleData.length = 0; // empties array
