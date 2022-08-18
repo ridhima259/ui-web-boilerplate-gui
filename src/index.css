@@ -406,6 +406,12 @@ label {
   color: rgb(34, 34, 34);
 }
 
+.listDataButton {
+  justify-content: space-between;
+  display: flex;
+  padding: 10px;
+}
+
 @media (max-width: 420px) {
   .css-1w1veeg {
     height: 48px;

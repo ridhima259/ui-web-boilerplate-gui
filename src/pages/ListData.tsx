@@ -153,25 +153,27 @@ const ListData = () => {
 
   return (
     <div>
-      <Button type="primary" onClick={() => history.push('/add-module')}>
-        Add Module
-      </Button>
-      <Button
-        type="primary"
-        onClick={() => {
-          const auth = getAuth();
-          signOut(auth)
-            .then(() => {
-              dispatch(setToken(''));
-              // Sign-out successful.
-            })
-            .catch(() => {
-              // An error happened.
-            });
-        }}
-      >
-        Sign Out
-      </Button>
+      <div className="listDataButton">
+        <Button type="primary" onClick={() => history.push('/add-module')}>
+          Add Module
+        </Button>
+        <Button
+          type="primary"
+          onClick={() => {
+            const auth = getAuth();
+            signOut(auth)
+              .then(() => {
+                dispatch(setToken(''));
+                // Sign-out successful.
+              })
+              .catch(() => {
+                // An error happened.
+              });
+          }}
+        >
+          Sign Out
+        </Button>
+      </div>
       <DataTable
         title="Pure Components List"
         highlightOnHover

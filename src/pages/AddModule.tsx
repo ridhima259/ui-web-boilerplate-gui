@@ -204,6 +204,7 @@ const AddModule = () => {
 
     const jsondata = {
       mainTitle: mainHeading,
+      isDeleted: false,
       dataset: addModuleData,
     };
 
@@ -387,6 +388,7 @@ const AddModule = () => {
                       );
                       const jsondata = {
                         mainTitle: mainHeading,
+                        isDeleted: false,
                         dataset: addModuleData,
                       };
                       try {
