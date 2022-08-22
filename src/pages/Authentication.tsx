@@ -51,7 +51,7 @@ const Authentication = () => {
           </div>
           <div className="form-group mt-3">
             <h5>Password</h5>
-            <Input
+            <Input.Password
               placeholder="Enter password"
               onChange={(e) => {
                 setPassword(e.target.value);

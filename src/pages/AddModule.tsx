@@ -112,7 +112,8 @@ const AddModule = () => {
     setType(data.type);
     const obj = addModuleData.find((o) => o.dp === data.dp);
     console.log('obj', obj);
-    if (type === 'Heading' || type === 'Description' || type === 'Usage') {
+    // prettier-ignore
+    if (data.type === 'Heading' || data.type === 'Description' || data.type === 'Usage') {
       if (obj) {
         setName(obj.desc);
       }
